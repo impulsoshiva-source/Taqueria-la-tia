@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pide tacos, gringas, tortas, volcanes y especialidades de Taquería La Tía en Iztapalapa. Personaliza tu pedido y envíalo por WhatsApp." />
+  <meta name="theme-color" content="#C81D25" />
+  <title>Taquería La Tía | Tacos y Taquizas en Iztapalapa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            salsa: '#C81D25', maiz: '#FFB800', pastor: '#E85D04',
+            crema: '#FFFDF9', seccion: '#F9F5F0', carbon: '#1E1E1E', gris: '#5C5C5C', borde: '#E8DED2'
+          },
+          fontFamily: { display: ['Rubik', 'sans-serif'], sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; background: #FFFDF9; color: #1E1E1E; }
+    h1,h2,h3,h4 { font-family: Rubik, sans-serif; }
+    :focus-visible { outline: 3px solid #E85D04; outline-offset: 3px; }
+    .skip-link { position:absolute; left:-999px; top:0; z-index:999; background:#1E1E1E; color:white; padding:.8rem 1rem; }
+    .skip-link:focus { left:0; }
+    .pattern { background-image: radial-gradient(rgba(200,29,37,.07) 1px, transparent 1px); background-size: 14px 14px; }
+    .steam { animation: steam 4s ease-in-out infinite; }
+    .steam:nth-child(2) { animation-delay: 1.2s; }
+    .steam:nth-child(3) { animation-delay: 2.3s; }
+    @keyframes steam { 0% { opacity:0; transform:translateY(5px) scaleX(.8); } 35% { opacity:.45; } 100% { opacity:0; transform:translateY(-34px) scaleX(1.25); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important; } }
+  </style>
+</head>
+<body>
+<a href="#menu" class="skip-link">Saltar al menú</a>
+
+<header class="sticky top-0 z-40 border-b border-borde bg-crema/95 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+    <a href="#inicio" class="flex items-center gap-3 font-display font-bold text-carbon">
+      <img class="h-11 w-11 rounded-full bg-white object-contain" src="https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/Logo_taqueria_la_tia.webp" alt="Logotipo de Taquería La Tía" />
+      <span>Taquería La Tía</span>
+    </a>
+    <nav class="hidden items-center gap-5 text-sm font-semibold text-gris md:flex">
+      <a class="hover:text-salsa" href="#menu">Menú</a>
+      <a class="hover:text-salsa" href="#taquizas">Taquizas</a>
+      <a class="hover:text-salsa" href="#ubicacion">Ubicación</a>
+      <a class="hover:text-salsa" href="#faq">FAQ</a>
+    </nav>
+    <button id="cartButton" class="relative rounded-xl bg-salsa px-4 py-2 text-sm font-bold text-white shadow-lg shadow-red-900/20 hover:bg-red-700">
+      🛒 Carrito <span id="cartCount" class="ml-1 rounded-full bg-maiz px-1.5 py-0.5 text-xs text-carbon">0</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section id="inicio" class="pattern relative overflow-hidden bg-crema">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-24">
+      <div>
+        <p class="mb-3 font-bold tracking-widest text-salsa text-sm">TAQUERÍA LA TÍA · IZTAPALAPA</p>
+        <h1 class="text-4xl font-black leading-tight text-carbon sm:text-5xl lg:text-6xl">El antojo se arma a tu gusto.</h1>
+        <p class="mt-5 max-w-xl text-lg text-gris">Tacos, gringas, tortas, volcanes y especialidades para pedir con cebolla, sin cebolla y con tus salsas favoritas. Arma tu pedido y envíalo por WhatsApp.</p>
+        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+          <a href="#menu" class="rounded-xl bg-salsa px-6 py-3 text-center font-bold text-white shadow-lg shadow-red-900/20 hover:bg-red-700">Ver menú y pedir</a>
+          <a href="#taquizas" class="rounded-xl bg-maiz px-6 py-3 text-center font-bold text-carbon shadow-lg shadow-yellow-900/10 hover:bg-yellow-400">Cotizar taquiza</a>
+        </div>
+        <div class="mt-8 grid gap-3 text-sm font-semibold text-gris sm:grid-cols-2">
+          <span>🕒 Lunes a domingo · 5:00 pm a 12:00 am</span>
+          <span>🚴 Envío a domicilio: $25 extra</span>
+          <span>📍 Iztapalapa</span>
+          <span>💵 Efectivo y transferencia</span>
+        </div>
+      </div>
+      <div class="relative mx-auto w-full max-w-lg">
+        <div class="absolute -right-5 -top-8 h-32 w-32 rounded-full bg-maiz/35 blur-2xl"></div>
+        <div class="absolute -bottom-10 -left-6 h-40 w-40 rounded-full bg-salsa/15 blur-2xl"></div>
+        <div class="relative overflow-hidden rounded-3xl border-8 border-white bg-seccion shadow-2xl">
+          <img class="h-[360px] w-full object-cover" src="https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/tacos.webp" alt="Tacos de Taquería La Tía" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-6 text-white">
+            <p class="text-xl font-black">Del comal a tu antojo 🌮</p>
+            <p class="text-sm">Personaliza cada pedido desde el menú.</p>
+          </div>
+          <div class="absolute right-10 top-10 flex gap-2" aria-hidden="true"><span class="steam h-6 w-2 rounded-full bg-white/50"></span><span class="steam h-8 w-2 rounded-full bg-white/40"></span><span class="steam h-5 w-2 rounded-full bg-white/45"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-borde bg-white py-7">
+    <div class="mx-auto grid max-w-7xl gap-4 px-4 text-center sm:grid-cols-4 sm:px-6">
+      <div><strong class="block text-salsa">Personaliza</strong><span class="text-sm text-gris">Cebolla, cilantro y salsas</span></div>
+      <div><strong class="block text-salsa">Arma tu carrito</strong><span class="text-sm text-gris">Revisa todo antes de enviar</span></div>
+      <div><strong class="block text-salsa">Pide por WhatsApp</strong><span class="text-sm text-gris">Resumen claro de tu orden</span></div>
+      <div><strong class="block text-salsa">Taquizas</strong><span class="text-sm text-gris">Para eventos y celebraciones</span></div>
+    </div>
+  </section>
+
+  <section id="menu" class="scroll-mt-20 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div>
+          <p class="font-bold tracking-widest text-salsa text-sm">MENÚ INTERACTIVO</p>
+          <h2 class="mt-2 text-3xl font-black text-carbon sm:text-4xl">Del comal al carrito.</h2>
+          <p class="mt-3 max-w-2xl text-gris">Elige categoría, carne, queso cuando aplique, cebolla, cilantro y tus salsas. Después revisa todo en tu carrito.</p>
+        </div>
+        <button id="clearCart" class="hidden rounded-lg border border-borde px-4 py-2 text-sm font-semibold text-gris hover:border-salsa hover:text-salsa">Vaciar carrito</button>
+      </div>
+      <div id="categoryTabs" class="no-scrollbar mb-8 flex gap-2 overflow-x-auto pb-2"></div>
+      <div id="menuGrid" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3"></div>
+    </div>
+  </section>
+
+  <section class="bg-seccion py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div>
+          <p class="font-bold tracking-widest text-salsa text-sm">A TU GUSTO</p>
+          <h2 class="mt-2 text-3xl font-black text-carbon sm:text-4xl">Cada taco, como a ti te gusta.</h2>
+          <p class="mt-4 text-lg text-gris">Con cebolla o sin cebolla, con cilantro o sin cilantro, y las salsas que se te antojen: guacamole, mora, martajada o roja.</p>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-4">
+          <div class="rounded-2xl bg-white p-4 text-center shadow-sm"><span class="text-3xl">1️⃣</span><p class="mt-2 font-bold">Elige</p><p class="text-xs text-gris">Tu platillo y carne</p></div>
+          <div class="rounded-2xl bg-white p-4 text-center shadow-sm"><span class="text-3xl">2️⃣</span><p class="mt-2 font-bold">Personaliza</p><p class="text-xs text-gris">Cebolla, cilantro y salsa</p></div>
+          <div class="rounded-2xl bg-white p-4 text-center shadow-sm"><span class="text-3xl">3️⃣</span><p class="mt-2 font-bold">Agrega</p><p class="text-xs text-gris">Al carrito</p></div>
+          <div class="rounded-2xl bg-white p-4 text-center shadow-sm"><span class="text-3xl">4️⃣</span><p class="mt-2 font-bold">Envía</p><p class="text-xs text-gris">Tu resumen por WhatsApp</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="rounded-3xl bg-carbon p-8 text-white sm:p-12">
+        <p class="font-bold tracking-widest text-maiz text-sm">SERVICIO A DOMICILIO</p>
+        <h2 class="mt-2 text-3xl font-black sm:text-4xl">¿Se te antojó desde casa?</h2>
+        <p class="mt-4 max-w-2xl text-white/80">Arma tu pedido, elige servicio a domicilio y comparte tu dirección al finalizar. El envío tiene un costo extra de $25 MXN. La disponibilidad, total y tiempo de entrega se confirman por WhatsApp.</p>
+        <a href="#menu" class="mt-6 inline-block rounded-xl bg-maiz px-6 py-3 font-bold text-carbon hover:bg-yellow-400">Armar pedido</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="taquizas" class="scroll-mt-20 bg-seccion py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="mb-10 max-w-3xl">
+        <p class="font-bold tracking-widest text-salsa text-sm">PARA EVENTOS, REUNIONES Y CELEBRACIONES</p>
+        <h2 class="mt-2 text-3xl font-black text-carbon sm:text-4xl">Taquizas para compartir momentos grandes.</h2>
+        <p class="mt-4 text-lg text-gris">Llevamos el sabor de Taquería La Tía a tu evento con opciones de servicio completo, puro taco o parrilla. Cuéntanos fecha, número de personas y ubicación aproximada para confirmar disponibilidad y preparar una cotización.</p>
+      </div>
+      <div id="taquizaGrid" class="grid gap-6 lg:grid-cols-3"></div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="mb-8 text-center"><p class="font-bold tracking-widest text-salsa text-sm">FAMILIA LA TÍA</p><h2 class="mt-2 text-3xl font-black text-carbon">Hecho para compartir en familia.</h2><p class="mt-3 text-gris">Mensajes compartidos por la familia de Taquería La Tía.</p></div>
+      <div class="grid gap-6 md:grid-cols-3">
+        <figure class="rounded-2xl border border-borde bg-white p-6 shadow-sm"><blockquote class="text-gris">“En La Tía me gusta que puedes armar cada taco a tu gusto: con o sin cebolla, con las salsas que se te antojen y siempre listo para compartir.”</blockquote><figcaption class="mt-4 font-bold text-carbon">Abraham Soriano</figcaption></figure>
+        <figure class="rounded-2xl border border-borde bg-white p-6 shadow-sm"><blockquote class="text-gris">“Las especialidades son perfectas cuando queremos algo diferente: una gringa, una torta o unos volcanes con mucho sabor.”</blockquote><figcaption class="mt-4 font-bold text-carbon">Claudia Noguez</figcaption></figure>
+        <figure class="rounded-2xl border border-borde bg-white p-6 shadow-sm"><blockquote class="text-gris">“Nos gustan las aguas frescas y pedir tacos para compartir en familia.”</blockquote><figcaption class="mt-4 font-bold text-carbon">Melanie y Yael Soriano</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion" class="scroll-mt-20 bg-seccion py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="grid gap-8 lg:grid-cols-2">
+        <div><p class="font-bold tracking-widest text-salsa text-sm">UBICACIÓN</p><h2 class="mt-2 text-3xl font-black text-carbon">Encuentra el antojo en Iztapalapa.</h2><p class="mt-4 text-lg text-gris">Batallones Rojos esquina Revolución Social, Iztapalapa, Ciudad de México.</p><p class="mt-3 font-semibold text-carbon">🕒 Lunes a domingo · 5:00 pm a 12:00 am</p><a class="mt-6 inline-block rounded-xl bg-salsa px-6 py-3 font-bold text-white hover:bg-red-700" href="https://wa.me/5215565097372?text=Hola%2C%20%C2%BFme%20pueden%20compartir%20la%20ubicaci%C3%B3n%20exacta%20de%20Taquer%C3%ADa%20La%20T%C3%ADa%3F" target="_blank" rel="noopener">Pedir ubicación por WhatsApp</a></div>
+        <div class="pattern rounded-3xl border border-borde bg-white p-8 shadow-sm"><div class="flex h-full min-h-56 flex-col items-center justify-center text-center"><span class="text-6xl">📍</span><h3 class="mt-4 text-xl font-black">Taquería La Tía</h3><p class="mt-2 text-gris">Batallones Rojos esq. Revolución Social<br>Iztapalapa, CDMX</p><p class="mt-5 text-sm text-gris">Mapa disponible al configurar el enlace oficial de Google Maps.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="scroll-mt-20 py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <div class="mb-8 text-center"><p class="font-bold tracking-widest text-salsa text-sm">DUDAS</p><h2 class="mt-2 text-3xl font-black text-carbon">Preguntas frecuentes.</h2></div>
+      <div id="faqList" class="space-y-3"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-carbon py-10 text-white">
+  <div class="mx-auto grid max-w-7xl gap-7 px-4 sm:px-6 md:grid-cols-3">
+    <div><h3 class="text-xl font-black">Taquería La Tía</h3><p class="mt-2 text-white/70">Tacos que se disfrutan como en familia.</p></div>
+    <div><p class="font-bold">Contacto</p><a class="mt-2 block text-white/70 hover:text-maiz" href="https://wa.me/5215565097372" target="_blank" rel="noopener">WhatsApp: +52 1 55 6509 7372</a><p class="mt-1 text-sm text-white/70">Lunes a domingo · 5:00 pm a 12:00 am</p></div>
+    <div><p class="font-bold">Información</p><a class="mt-2 block text-sm text-white/70 hover:text-maiz" href="#faq">Preguntas frecuentes</a><a class="mt-1 block text-sm text-white/70 hover:text-maiz" href="#taquizas">Taquizas</a><p class="mt-4 text-xs text-white/50">© 2026 Taquería La Tía.</p></div>
+  </div>
+</footer>
+
+<aside id="cartDrawer" class="fixed inset-y-0 right-0 z-50 hidden w-full max-w-md overflow-y-auto bg-crema shadow-2xl" aria-label="Carrito de compras">
+  <div class="sticky top-0 z-10 flex items-center justify-between border-b border-borde bg-crema p-4"><h2 class="text-xl font-black">Tu carrito</h2><button id="closeCart" class="rounded-lg p-2 text-2xl hover:bg-seccion" aria-label="Cerrar carrito">×</button></div>
+  <div id="cartContent" class="p-4"></div>
+</aside>
+<div id="cartBackdrop" class="fixed inset-0 z-40 hidden bg-black/40"></div>
+
+<script>
+const SITE={whatsapp:'5215565097372',deliveryFee:25};
+const categories=[
+['tacos','🌮','Tacos de maíz'],['tacos-harina','🫓','Tacos de harina'],['tortas','🥪','Tortas'],['gringas','🧀','Gringas'],['burritas','🌯','Burritas'],['volcanes','🔥','Volcanes'],['quesadillas','🫓','Quesadillas'],['burros','🌯','Burros'],['costra','🧀','Costra de queso'],['chimichanga','✨','Chimichanga'],['nopal','🌵','Nopal zapoteco'],['alambres','🍳','Alambres'],['aguas','🥤','Aguas frescas']
+];
+const meat=(prices,cheese)=>Object.entries(prices).map(([id,price])=>({id,label:id.charAt(0).toUpperCase()+id.slice(1),price,cheesePrice:cheese?cheese[id]:null}));
+const menu=[
+{id:'tacos',cat:'tacos',name:'Tacos de maíz',desc:'Tortilla de maíz al comal. c/q = con queso.',img:'https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/taco%20de%20pastor.webp',variants:meat({pastor:15,suadero:15,longaniza:15,bistec:17,campechano:17,arrachera:25},{pastor:25,suadero:25,longaniza:25,bistec:25,campechano:25,arrachera:35}),cheese:true},
+{id:'harina',cat:'tacos-harina',name:'Tacos de harina',desc:'Tortilla de harina suave con carne al comal.',img:'https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/tacos.webp',variants:meat({pastor:30,suadero:30,longaniza:30,bistec:35,campechano:35,arrachera:40})},
+{id:'tortas',cat:'tortas',name:'Tortas',desc:'Telera con carne al comal. c/q = con queso.',img:'https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/torta.webp',variants:meat({pastor:50,longaniza:50,bistec:60,suadero:60,campechana:60,arrachera:70},{pastor:60,longaniza:60,bistec:70,suadero:70,campechana:70,arrachera:80}),cheese:true},
+{id:'gringas',cat:'gringas',name:'Gringas',desc:'Queso fundido y carne en tortilla de harina.',img:'https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/gringa.webp',variants:meat({pastor:60,longaniza:60,bistec:70,suadero:70,campechana:70,arrachera:80})},
+{id:'burritas',cat:'burritas',name:'Burritas',desc:'Tortilla de harina enrollada y bien rellena.',variants:meat({pastor:60,longaniza:60,bistec:70,suadero:70,campechana:70,arrachera:80})},
+{id:'volcanes',cat:'volcanes',name:'Volcanes',desc:'Tostada crujiente con queso y carne.',img:'https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/volcan.webp',variants:meat({pastor:60,longaniza:60,bistec:70,suadero:70,campechano:70,arrachera:80})},
+{id:'quesadillas',cat:'quesadillas',name:'Quesadillas de harina',desc:'Tortilla de harina con queso fundido y carne.',variants:meat({pastor:50,longaniza:50,bistec:60,suadero:60,campechana:60,arrachera:65})},
+{id:'burros',cat:'burros',name:'Burros',desc:'Burro grande para hambre grande.',variants:meat({pastor:80,longaniza:80,bistec:90,suadero:90,campechano:90,arrachera:120})},
+{id:'costra',cat:'costra',name:'Costra de queso',desc:'Queso dorado y crujiente envolviendo carne.',variants:meat({pastor:80,longaniza:80,bistec:90,suadero:90,campechano:90,arrachera:120})},
+{id:'chimichanga',cat:'chimichanga',name:'Chimichanga',desc:'Tortilla de harina dorada y crujiente.',variants:meat({pastor:80,longaniza:80,bistec:90,suadero:90,campechano:90,arrachera:120})},
+{id:'nopal',cat:'nopal',name:'Nopal zapoteco',desc:'Nopal asado con carne al comal.',variants:meat({pastor:80,longaniza:80,bistec:90,suadero:90,campechano:90,arrachera:120})},
+{id:'alambres',cat:'alambres',name:'Alambres',desc:'Para compartir. Consulta ingredientes al confirmar.',variants:[{id:'chico',label:'Chico · 2 personas',price:150},{id:'mediano',label:'Mediano · 3 personas',price:200},{id:'grande',label:'Grande · 4 personas',price:250},{id:'familiar',label:'Familiar · 6 personas',price:300}]},
+{id:'horchata',cat:'aguas',name:'Agua de horchata',desc:'1 litro bien frío.',variants:[{id:'litro',label:'1 litro',price:40}],drink:true},
+{id:'jamaica',cat:'aguas',name:'Agua de jamaica',desc:'1 litro bien frío.',variants:[{id:'litro',label:'1 litro',price:40}],drink:true},
+{id:'guayaba',cat:'aguas',name:'Agua de guayaba con limón',desc:'1 litro bien frío.',variants:[{id:'litro',label:'1 litro',price:40}],drink:true}
+];
+const taquizas=[
+{name:'Servicio completo',items:['Trompo al pastor, bistec, longaniza y suadero','Quesillo, tostadas, bolillos y tortillas de harina','Tres tipos de salsa, guacamole, salsa roja y martajada','Limones, pepinos, cebollitas con nopales','Desechables y servilletas','Promedio de 10 tacos por persona','Gringas, tortas, burritas y volcanes','Servicio estimado de tres horas']},
+{name:'Servicio de puro taco',items:['Trompo al pastor, bistec, longaniza y suadero','Tres tipos de salsa, guacamole, salsa roja y martajada','Limones, pepinos, cebollitas con nopales','Desechables y servilletas','Promedio de 10 tacos por persona','Servicio estimado de tres horas']},
+{name:'Servicio de parrilla',items:['Ocho carnes: arrachera, bistec, longaniza, chorizo argentino, carne enchilada, pechuga, chuleta y chistorra','Frijoles, papas, nopales, pico de gallo, guacamole, martajada, limones y pápalo','Promedio de 5 a 6 tacos por persona','Tortilla normal','Servicio estimado de tres horas']}
+];
+let activeCat='tacos'; let cart=JSON.parse(localStorage.getItem('latia-cart')||'[]');
+const esc=s=>String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+function money=n=>new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0}).format(n);
+function renderTabs(){document.getElementById('categoryTabs').innerHTML=categories.map(([id,icon,label])=>`<button data-cat="${id}" class="shrink-0 rounded-full border px-4 py-2 text-sm font-bold ${id===activeCat?'border-salsa bg-salsa text-white':'border-borde bg-white text-gris hover:border-salsa'}">${icon} ${label}</button>`).join('');document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{activeCat=b.dataset.cat;renderMenu();renderTabs()})}
+function renderMenu(){const items=menu.filter(x=>x.cat===activeCat);document.getElementById('menuGrid').innerHTML=items.map(item=>`<article class="overflow-hidden rounded-2xl border border-borde bg-white shadow-sm">${item.img?`<img class="h-44 w-full object-cover" src="${item.img}" alt="${esc(item.name)} de Taquería La Tía">`:`<div class="pattern flex h-32 items-center justify-center bg-seccion text-5xl">🌮</div>`}<div class="p-5"><h3 class="text-xl font-black">${esc(item.name)}</h3><p class="mt-1 min-h-12 text-sm text-gris">${esc(item.desc)}</p><p class="mt-3 font-bold text-salsa">Desde ${money(Math.min(...item.variants.map(v=>v.price)))}</p><button data-item="${item.id}" class="mt-4 w-full rounded-xl bg-salsa px-4 py-3 font-bold text-white hover:bg-red-700">Personalizar y agregar</button></div></article>`).join('');document.querySelectorAll('[data-item]').forEach(b=>b.onclick=()=>showCustomizer(menu.find(x=>x.id===b.dataset.item)))}
+function showCustomizer(item){const variant=item.variants[0];const options=item.variants.map(v=>`<option value="${v.id}">${esc(v.label)} — ${money(v.price)}</option>`).join('');const cheese=item.cheese?`<label class="mt-3 flex items-center gap-2"><input id="cheese" type="checkbox"> <span>Con queso <span class="text-gris text-sm">(según carne)</span></span></label>`:'';const prefs=item.drink?'':`<div class="mt-4 grid gap-3 sm:grid-cols-2"><fieldset><legend class="font-bold">Cebolla</legend><label class="mr-3"><input name="onion" type="radio" value="Con cebolla" checked> Con cebolla</label><label><input name="onion" type="radio" value="Sin cebolla"> Sin cebolla</label></fieldset><fieldset><legend class="font-bold">Cilantro</legend><label class="mr-3"><input name="cilantro" type="radio" value="Con cilantro" checked> Con cilantro</label><label><input name="cilantro" type="radio" value="Sin cilantro"> Sin cilantro</label></fieldset></div><fieldset class="mt-4"><legend class="font-bold">Salsas</legend><div class="mt-2 flex flex-wrap gap-2"><label class="rounded-full border border-borde px-3 py-1 text-sm"><input class="salsa" type="checkbox" value="Guacamole"> Guacamole</label><label class="rounded-full border border-borde px-3 py-1 text-sm"><input class="salsa" type="checkbox" value="Salsa mora"> Salsa mora</label><label class="rounded-full border border-borde px-3 py-1 text-sm"><input class="salsa" type="checkbox" value="Salsa martajada"> Martajada</label><label class="rounded-full border border-borde px-3 py-1 text-sm"><input class="salsa" type="checkbox" value="Salsa roja"> Roja</label><label class="rounded-full border border-borde px-3 py-1 text-sm"><input id="noSalsa" type="checkbox"> Sin salsa</label></div></fieldset>`;document.getElementById('cartContent').innerHTML=`<div><button id="backMenu" class="mb-4 text-sm font-bold text-salsa">← Volver al menú</button><h2 class="text-2xl font-black">${esc(item.name)}</h2><p class="mt-1 text-sm text-gris">${esc(item.desc)}</p><label class="mt-4 block font-bold">Elige tu opción<select id="variant" class="mt-1 w-full rounded-lg border border-borde bg-white p-3">${options}</select></label>${cheese}${prefs}<label class="mt-4 block font-bold">Cantidad<div class="mt-1 flex items-center gap-3"><button id="minus" class="rounded-lg border border-borde px-3 py-1" type="button">−</button><span id="qty" class="min-w-8 text-center font-bold">1</span><button id="plus" class="rounded-lg border border-borde px-3 py-1" type="button">+</button></div></label><label class="mt-4 block font-bold">Nota opcional<textarea id="note" maxlength="140" class="mt-1 w-full rounded-lg border border-borde p-3 text-sm" placeholder="Ej. sin limón"></textarea></label><button id="addCart" class="mt-5 w-full rounded-xl bg-salsa px-4 py-3 font-bold text-white hover:bg-red-700">Agregar al carrito</button></div>`;openCart();let qty=1;document.getElementById('minus').onclick=()=>{qty=Math.max(1,qty-1);document.getElementById('qty').textContent=qty};document.getElementById('plus').onclick=()=>{qty++;document.getElementById('qty').textContent=qty};const noS=document.getElementById('noSalsa');if(noS)noS.onchange=()=>{if(noS.checked)document.querySelectorAll('.salsa').forEach(x=>x.checked=false)};document.querySelectorAll('.salsa').forEach(x=>x.onchange=()=>{if(x.checked)noS.checked=false});document.getElementById('backMenu').onclick=renderCart;document.getElementById('addCart').onclick=()=>{const v=item.variants.find(v=>v.id===document.getElementById('variant').value);const withCheese=document.getElementById('cheese')?.checked||false;const price=withCheese&&v.cheesePrice?v.cheesePrice:v.price;const salsas=noS?.checked?['Sin salsa']:[...document.querySelectorAll('.salsa:checked')].map(x=>x.value);cart.push({id:crypto.randomUUID(),name:item.name,variant:v.label,price,qty,cheese:withCheese?'Con queso':'Sin queso',onion:item.drink?'':document.querySelector('input[name="onion"]:checked')?.value,cilantro:item.drink?'':document.querySelector('input[name="cilantro"]:checked')?.value,salsas:salsas.length?salsas:['Sin salsa'],note:document.getElementById('note').value});saveCart();renderCart();updateCount()}}
+function saveCart(){localStorage.setItem('latia-cart',JSON.stringify(cart))}function updateCount(){document.getElementById('cartCount').textContent=cart.reduce((a,x)=>a+x.qty,0);document.getElementById('clearCart').classList.toggle('hidden',!cart.length)}
+function renderCart(){const sub=cart.reduce((a,x)=>a+x.price*x.qty,0);if(!cart.length){document.getElementById('cartContent').innerHTML='<div class="py-12 text-center"><p class="text-5xl">🌮</p><h2 class="mt-4 text-xl font-black">Tu carrito está vacío</h2><p class="mt-2 text-gris">Agrega tus tacos y especialidades favoritas.</p><button id="goMenu" class="mt-5 rounded-xl bg-salsa px-5 py-3 font-bold text-white">Ver menú</button></div>';document.getElementById('goMenu').onclick=()=>{closeCart();document.getElementById('menu').scrollIntoView()};return}document.getElementById('cartContent').innerHTML=`<div class="space-y-4">${cart.map((x,i)=>`<div class="rounded-xl border border-borde p-3"><div class="flex justify-between gap-3"><div><p class="font-bold">${x.qty}x ${esc(x.name)}</p><p class="text-sm text-gris">${esc(x.variant)} · ${x.cheese}</p>${x.onion?`<p class="text-xs text-gris">${x.onion} · ${x.cilantro}</p>`:''}<p class="text-xs text-gris">Salsas: ${esc(x.salsas.join(', '))}</p>${x.note?`<p class="text-xs text-gris">Nota: ${esc(x.note)}</p>`:''}</div><div class="text-right"><p class="font-bold">${money(x.price*x.qty)}</p><button data-remove="${i}" class="mt-2 text-sm font-bold text-salsa">Eliminar</button></div></div></div>`).join('')}<div class="border-t border-borde pt-4"><p class="flex justify-between font-bold"><span>Subtotal</span><span>${money(sub)}</span></p><label class="mt-4 block font-bold">Modalidad<select id="mode" class="mt-1 w-full rounded-lg border border-borde bg-white p-3"><option value="pickup">Recoger en taquería</option><option value="delivery">Servicio a domicilio (+$25)</option></select></label><div id="deliveryFields" class="hidden"><label class="mt-3 block font-bold">Nombre<input id="customer" class="mt-1 w-full rounded-lg border border-borde p-3" placeholder="Tu nombre"></label><label class="mt-3 block font-bold">Dirección y referencias<textarea id="address" class="mt-1 w-full rounded-lg border border-borde p-3" placeholder="Calle, número y referencias"></textarea></label></div><label class="mt-3 block font-bold">Método de pago<select id="payment" class="mt-1 w-full rounded-lg border border-borde bg-white p-3"><option>Efectivo</option><option>Transferencia</option></select></label><label class="mt-3 block font-bold">Comentario general opcional<textarea id="comment" class="mt-1 w-full rounded-lg border border-borde p-3"></textarea></label><p id="totalLine" class="mt-4 flex justify-between text-lg font-black"><span>Total estimado</span><span>${money(sub)}</span></p><label class="mt-4 flex gap-2 text-sm text-gris"><input id="confirm" type="checkbox"> Entiendo que el pedido, disponibilidad, total final y tiempo de entrega se confirman por WhatsApp.</label><button id="sendOrder" class="mt-4 w-full rounded-xl bg-[#25D366] px-4 py-3 font-bold text-white hover:bg-green-600">Enviar pedido por WhatsApp</button></div></div>`;document.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.remove,1);saveCart();updateCount();renderCart()});const mode=document.getElementById('mode');const recalc=()=>{const total=sub+(mode.value==='delivery'?SITE.deliveryFee:0);document.getElementById('totalLine').innerHTML=`<span>Total estimado</span><span>${money(total)}</span>`;document.getElementById('deliveryFields').classList.toggle('hidden',mode.value!=='delivery')};mode.onchange=recalc;document.getElementById('sendOrder').onclick=()=>{if(!document.getElementById('confirm').checked){alert('Confirma que entiendes que el pedido se valida por WhatsApp.');return}const delivery=mode.value==='delivery';if(delivery&&(!document.getElementById('customer').value.trim()||!document.getElementById('address').value.trim())){alert('Para domicilio agrega tu nombre y dirección.');return}const total=sub+(delivery?SITE.deliveryFee:0);const lines=cart.map((x,i)=>`${i+1}. ${x.qty}x ${x.name} — ${x.variant} — ${x.cheese}\n   ${x.onion?`Cebolla: ${x.onion}\n   Cilantro: ${x.cilantro}\n   `:''}Salsas: ${x.salsas.join(', ')}${x.note?`\n   Nota: ${x.note}`:''}\n   Importe: ${money(x.price*x.qty)}`).join('\n\n');const text=`🌮 *NUEVO PEDIDO — TAQUERÍA LA TÍA*\n\n*Cliente:* ${delivery?document.getElementById('customer').value:'Por confirmar'}\n*Modalidad:* ${delivery?'Servicio a domicilio':'Recoger en taquería'}${delivery?`\n*Dirección y referencias:* ${document.getElementById('address').value}`:''}\n\n*PEDIDO*\n${lines}\n\n*Subtotal:* ${money(sub)}\n*Envío:* ${delivery?money(SITE.deliveryFee):money(0)}\n*Total estimado:* ${money(total)}\n\n*Método de pago preferido:* ${document.getElementById('payment').value}\n*Comentario general:* ${document.getElementById('comment').value||'Sin comentarios'}\n\nEntiendo que el pedido, disponibilidad, total final y tiempo de entrega deben confirmarse por WhatsApp. ¡Gracias!`;window.open(`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`,'_blank','noopener')}}
+function openCart(){document.getElementById('cartDrawer').classList.remove('hidden');document.getElementById('cartBackdrop').classList.remove('hidden')}function closeCart(){document.getElementById('cartDrawer').classList.add('hidden');document.getElementById('cartBackdrop').classList.add('hidden')}
+document.getElementById('cartButton').onclick=()=>{renderCart();openCart()};document.getElementById('closeCart').onclick=closeCart;document.getElementById('cartBackdrop').onclick=closeCart;document.getElementById('clearCart').onclick=()=>{if(confirm('¿Vaciar carrito?')){cart=[];saveCart();updateCount();renderCart()}};
+function renderTaquizas(){document.getElementById('taquizaGrid').innerHTML=taquizas.map(t=>`<article class="flex flex-col rounded-2xl border border-borde bg-white p-6 shadow-sm"><h3 class="text-2xl font-black">${t.name}</h3><ul class="mt-4 flex-1 space-y-2 text-sm text-gris">${t.items.map(x=>`<li class="flex gap-2"><span class="text-salsa">•</span><span>${x}</span></li>`).join('')}</ul><a class="mt-6 rounded-xl bg-salsa px-4 py-3 text-center font-bold text-white hover:bg-red-700" target="_blank" rel="noopener" href="https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`🌮 *SOLICITUD DE COTIZACIÓN — TAQUIZA LA TÍA*\n\n*Servicio de interés:* ${t.name}\n*Fecha del evento:* \n*Horario aproximado:* \n*Número aproximado de personas:* \n*Ubicación aproximada del evento:* \n*Nombre de contacto:* \n*WhatsApp:* \n*Comentarios o necesidades especiales:* \n\nMe gustaría conocer disponibilidad, costo y condiciones para mi evento. Gracias.`)}">Cotizar ${t.name.toLowerCase()}</a></article>`).join('')}
+const faqs=[['¿Cuál es el horario?','Abrimos lunes a domingo de 5:00 pm a 12:00 am.'],['¿Hacen envíos a domicilio?','Sí. El servicio a domicilio tiene un costo extra de $25 MXN. La disponibilidad y tiempo de entrega se confirman por WhatsApp.'],['¿Qué significa c/q?','Significa con queso.'],['¿Puedo pedir sin cebolla o sin cilantro?','Sí. Puedes elegir tus preferencias antes de agregar cada producto al carrito.'],['¿Qué salsas puedo elegir?','Guacamole, salsa mora, salsa martajada y salsa roja. También puedes pedir sin salsa.'],['¿Cómo pago?','Aceptamos efectivo y transferencia. La forma de pago se confirma por WhatsApp.'],['¿El pedido queda confirmado al enviarlo?','No. El carrito genera un resumen para WhatsApp. El pedido queda confirmado cuando Taquería La Tía valida disponibilidad, total y modalidad de entrega.'],['¿Hacen taquizas para eventos?','Sí. Tenemos servicio completo, puro taco y parrilla. Escríbenos por WhatsApp para cotizar fecha, personas y ubicación.']];
+function renderFaq(){document.getElementById('faqList').innerHTML=faqs.map(([q,a])=>`<details class="rounded-xl border border-borde bg-white p-5 shadow-sm"><summary class="cursor-pointer font-bold text-carbon">${q}</summary><p class="mt-3 text-gris">${a}</p></details>`).join('')}
+renderTabs();renderMenu();renderTaquizas();renderFaq();updateCount();
+</script>
+</body>
+</html>
