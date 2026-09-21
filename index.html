@@ -1,245 +1,917 @@
 <!doctype html>
 <html lang="es-MX">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Pide tacos, gringas, tortas, volcanes y especialidades de Taquería La Tía en Iztapalapa. Personaliza tu pedido y envíalo por WhatsApp." />
-  <meta name="theme-color" content="#C81D25" />
-  <title>Taquería La Tía | Tacos y Taquizas en Iztapalapa</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            salsa: '#C81D25', maiz: '#FFB800', pastor: '#E85D04',
-            crema: '#FFFDF9', seccion: '#F9F5F0', carbon: '#1E1E1E', gris: '#5C5C5C', borde: '#E8DED2'
-          },
-          fontFamily: { display: ['Rubik', 'sans-serif'], sans: ['Inter', 'sans-serif'] }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taquería La Tía | Tacos que se disfrutan como en familia</title>
+    <meta name="description" content="Los mejores tacos de Iztapalapa. Taquería La Tía ofrece sabores auténticos, servicio a domicilio y el ambiente familiar que buscas. Visítanos en Batallones Rojos esq. Revolución Social.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        salsa: '#C81D25',
+                        salsaDark: '#97131A',
+                        maiz: '#FFB800',
+                        maizDark: '#E5A500',
+                        pastor: '#E85D04',
+                        crema: '#FFFDF9',
+                        seccion: '#F9F5F0',
+                        carbon: '#1E1E1E',
+                        gris: '#5C5C5C',
+                        borde: '#E8DED2',
+                        success: '#2E7D32'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Rubik', 'sans-serif'],
+                    }
+                }
+            }
         }
-      }
-    }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    html { scroll-behavior: smooth; }
-    body { font-family: Inter, sans-serif; background: #FFFDF9; color: #1E1E1E; }
-    h1,h2,h3,h4 { font-family: Rubik, sans-serif; }
-    :focus-visible { outline: 3px solid #E85D04; outline-offset: 3px; }
-    .skip-link { position:absolute; left:-999px; top:0; z-index:999; background:#1E1E1E; color:white; padding:.8rem 1rem; }
-    .skip-link:focus { left:0; }
-    .pattern { background-image: radial-gradient(rgba(200,29,37,.07) 1px, transparent 1px); background-size: 14px 14px; }
-    .steam { animation: steam 4s ease-in-out infinite; }
-    .steam:nth-child(2) { animation-delay: 1.2s; }
-    .steam:nth-child(3) { animation-delay: 2.3s; }
-    @keyframes steam { 0% { opacity:0; transform:translateY(5px) scaleX(.8); } 35% { opacity:.45; } 100% { opacity:0; transform:translateY(-34px) scaleX(1.25); } }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important; } }
-  </style>
+    </script>
+
+    <style>
+        /* Custom Styles & Animations */
+        body {
+            background-color: #FFFDF9;
+            color: #1E1E1E;
+            overflow-x: hidden;
+        }
+
+        .font-display {
+            font-family: 'Rubik', sans-serif;
+        }
+
+        /* Steam Animation Base */
+        .steam-container {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .steam {
+            position: absolute;
+            bottom: 0;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            filter: blur(8px);
+            opacity: 0;
+        }
+
+        /* Card Hover Effects */
+        .menu-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid transparent;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -12px rgba(200, 29, 37, 0.25);
+            border-color: #C81D25;
+            z-index: 10;
+        }
+
+        .menu-card img {
+            transition: transform 0.5s ease;
+        }
+
+        .menu-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* CTA Pulse */
+        @keyframes pulse-red {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200, 29, 37, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(200, 29, 37, 0); }
+        }
+
+        .btn-cta {
+            animation: pulse-red 2s infinite;
+        }
+
+        /* Wave Footer Background */
+        .footer-wave {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.883-.86 2.07-1.356 3.32-1.356 1.25 0 2.436.496 3.32 1.356h42.35c.884-.86 2.07-1.356 3.32-1.356 1.25 0 2.437.496 3.32 1.356H100v-2.644c-.883.86-2.07 1.356-3.32 1.356-1.25 0-2.436-.496-3.32-1.356H51.01c-.884.86-2.07 1.356-3.32 1.356-1.25 0-2.437-.496-3.32-1.356H0V20h21.184z' fill='%23C81D25' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            animation: wave-bg 20s linear infinite;
+        }
+
+        @keyframes wave-bg {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 0; }
+        }
+
+        /* Cart Drawer */
+        #cartDrawer {
+            transform: translateX(100%);
+            visibility: hidden;
+        }
+        
+        #cartBackdrop {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Tab Active State */
+        .tab-btn.active {
+            background-color: #C81D25;
+            color: white;
+            border-color: #C81D25;
+        }
+    </style>
 </head>
-<body>
-<a href="#menu" class="skip-link">Saltar al menú</a>
+<body class="antialiased selection:bg-salsa selection:text-white">
 
-<header class="sticky top-0 z-40 border-b border-borde bg-crema/95 backdrop-blur">
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-    <a href="#inicio" class="flex items-center gap-3 font-display font-bold text-carbon">
-      <img class="h-11 w-11 rounded-full bg-white object-contain" src="https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/Logo_taqueria_la_tia.webp" alt="Logotipo de Taquería La Tía" />
-      <span>Taquería La Tía</span>
-    </a>
-    <nav class="hidden items-center gap-5 text-sm font-semibold text-gris md:flex">
-      <a class="hover:text-salsa" href="#menu">Menú</a>
-      <a class="hover:text-salsa" href="#taquizas">Taquizas</a>
-      <a class="hover:text-salsa" href="#ubicacion">Ubicación</a>
-      <a class="hover:text-salsa" href="#faq">FAQ</a>
-    </nav>
-    <button id="cartButton" class="relative rounded-xl bg-salsa px-4 py-2 text-sm font-bold text-white shadow-lg shadow-red-900/20 hover:bg-red-700">
-      🛒 Carrito <span id="cartCount" class="ml-1 rounded-full bg-maiz px-1.5 py-0.5 text-xs text-carbon">0</span>
-    </button>
-  </div>
-</header>
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-crema/90 backdrop-blur-md border-b border-borde transition-all duration-300" id="mainHeader">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <!-- Logo Placeholder (SVG) -->
+                <div class="w-10 h-10 bg-salsa rounded-full flex items-center justify-center text-white font-display font-bold text-xl shadow-lg">
+                    T
+                </div>
+                <span class="font-display font-bold text-xl text-carbon tracking-tight">Taquería La Tía</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-gris">
+                <a href="#inicio" class="hover:text-salsa transition-colors">Inicio</a>
+                <a href="#menu" class="hover:text-salsa transition-colors">Menú</a>
+                <a href="#servicios" class="hover:text-salsa transition-colors">Servicios</a>
+                <a href="#ubicacion" class="hover:text-salsa transition-colors">Ubicación</a>
+            </nav>
 
-<main>
-  <section id="inicio" class="pattern relative overflow-hidden bg-crema">
-    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-24">
-      <div>
-        <p class="mb-3 font-bold tracking-widest text-salsa text-sm">TAQUERÍA LA TÍA · IZTAPALAPA</p>
-        <h1 class="text-4xl font-black leading-tight text-carbon sm:text-5xl lg:text-6xl">El antojo se arma a tu gusto.</h1>
-        <p class="mt-5 max-w-xl text-lg text-gris">Tacos, gringas, tortas, volcanes y especialidades para pedir con cebolla, sin cebolla y con tus salsas favoritas. Arma tu pedido y envíalo por WhatsApp.</p>
-        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-          <a href="#menu" class="rounded-xl bg-salsa px-6 py-3 text-center font-bold text-white shadow-lg shadow-red-900/20 hover:bg-red-700">Ver menú y pedir</a>
-          <a href="#taquizas" class="rounded-xl bg-maiz px-6 py-3 text-center font-bold text-carbon shadow-lg shadow-yellow-900/10 hover:bg-yellow-400">Cotizar taquiza</a>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCart()" class="relative p-2 hover:bg-seccion rounded-full transition-colors group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-carbon group-hover:text-salsa transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span id="cartCount" class="absolute top-0 right-0 bg-salsa text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full transform scale-0 transition-transform duration-200">0</span>
+                </button>
+                <a href="https://wa.me/5215565097372" target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-success text-white px-4 py-2 rounded-full font-semibold hover:bg-green-700 transition-colors text-sm">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                    Pedir Ahora
+                </a>
+            </div>
         </div>
-        <div class="mt-8 grid gap-3 text-sm font-semibold text-gris sm:grid-cols-2">
-          <span>🕒 Lunes a domingo · 5:00 pm a 12:00 am</span>
-          <span>🚴 Envío a domicilio: $25 extra</span>
-          <span>📍 Iztapalapa</span>
-          <span>💵 Efectivo y transferencia</span>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-crema">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 z-0 opacity-10">
+            <div class="absolute top-20 left-10 w-64 h-64 bg-maiz rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-salsa rounded-full blur-3xl"></div>
         </div>
-      </div>
-      <div class="relative mx-auto w-full max-w-lg">
-        <div class="absolute -right-5 -top-8 h-32 w-32 rounded-full bg-maiz/35 blur-2xl"></div>
-        <div class="absolute -bottom-10 -left-6 h-40 w-40 rounded-full bg-salsa/15 blur-2xl"></div>
-        <div class="relative overflow-hidden rounded-3xl border-8 border-white bg-seccion shadow-2xl">
-          <img class="h-[360px] w-full object-cover" src="https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/tacos.webp" alt="Tacos de Taquería La Tía" />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-6 text-white">
-            <p class="text-xl font-black">Del comal a tu antojo 🌮</p>
-            <p class="text-sm">Personaliza cada pedido desde el menú.</p>
-          </div>
-          <div class="absolute right-10 top-10 flex gap-2" aria-hidden="true"><span class="steam h-6 w-2 rounded-full bg-white/50"></span><span class="steam h-8 w-2 rounded-full bg-white/40"></span><span class="steam h-5 w-2 rounded-full bg-white/45"></span></div>
+
+        <div class="container mx-auto px-4 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+            <div class="text-center md:text-left space-y-6 hero-content">
+                <span class="inline-block px-4 py-1 rounded-full bg-salsa/10 text-salsa font-semibold text-sm tracking-wide uppercase mb-2">Iztapalapa, CDMX</span>
+                <h1 class="font-display text-5xl md:text-7xl font-black text-carbon leading-tight">
+                    Tacos que se disfrutan <br><span class="text-salsa">como en familia.</span>
+                </h1>
+                <p class="text-lg text-gris max-w-lg mx-auto md:mx-0">
+                    El sabor auténtico de la tradición mexicana en cada bocado. Ingredientes frescos, recetas caseras y el calor de hogar que solo La Tía te puede dar.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
+                    <a href="#menu" class="btn-cta bg-salsa text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-salsaDark transition-colors text-center">
+                        Ver Menú
+                    </a>
+                    <a href="#ubicacion" class="bg-white border-2 border-carbon text-carbon px-8 py-4 rounded-full font-bold text-lg hover:bg-carbon hover:text-white transition-colors text-center">
+                        Cómo Llegar
+                    </a>
+                </div>
+                
+                <div class="pt-8 flex items-center justify-center md:justify-start gap-6 text-sm text-gris font-medium">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-maiz" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <span>4.9 Calificación</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span>Lun-Dom 5pm-12am</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative hero-image-wrapper">
+                <!-- Main Image -->
+                <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                    <img src="https://image.qwenlm.ai/public_source/f67ca376-ec04-415a-9e63-2292203c793d/370acdd58-a5be-4639-ab0c-e67cba7591239084.png" alt="Tacos al Pastor deliciosos" class="w-full h-auto object-cover hero-image" width="600" height="600" loading="eager">
+                    
+                    <!-- Steam Particles -->
+                    <div class="steam-container">
+                        <div class="steam" style="left: 20%"></div>
+                        <div class="steam" style="left: 50%"></div>
+                        <div class="steam" style="left: 80%"></div>
+                        <div class="steam" style="left: 35%"></div>
+                        <div class="steam" style="left: 65%"></div>
+                    </div>
+                </div>
+                
+                <!-- Decorative Badge -->
+                <div class="absolute -bottom-6 -left-6 bg-maiz text-carbon p-6 rounded-2xl shadow-xl z-20 transform -rotate-6 hidden md:block">
+                    <p class="font-display font-black text-2xl leading-none">100%</p>
+                    <p class="text-sm font-bold uppercase tracking-wider mt-1">Sabor Casero</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="border-y border-borde bg-white py-7">
-    <div class="mx-auto grid max-w-7xl gap-4 px-4 text-center sm:grid-cols-4 sm:px-6">
-      <div><strong class="block text-salsa">Personaliza</strong><span class="text-sm text-gris">Cebolla, cilantro y salsas</span></div>
-      <div><strong class="block text-salsa">Arma tu carrito</strong><span class="text-sm text-gris">Revisa todo antes de enviar</span></div>
-      <div><strong class="block text-salsa">Pide por WhatsApp</strong><span class="text-sm text-gris">Resumen claro de tu orden</span></div>
-      <div><strong class="block text-salsa">Taquizas</strong><span class="text-sm text-gris">Para eventos y celebraciones</span></div>
-    </div>
-  </section>
-
-  <section id="menu" class="scroll-mt-20 py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <p class="font-bold tracking-widest text-salsa text-sm">MENÚ INTERACTIVO</p>
-          <h2 class="mt-2 text-3xl font-black text-carbon sm:text-4xl">Del comal al carrito.</h2>
-          <p class="mt-3 max-w-2xl text-gris">Elige categoría, carne, queso cuando aplique, cebolla, cilantro y tus salsas. Después revisa todo en tu carrito.</p>
+    <!-- Benefits Banner -->
+    <section class="bg-carbon text-crema py-8 relative z-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-gray-700">
+                <div class="flex flex-col items-center p-4 benefit-item">
+                    <div class="w-12 h-12 bg-salsa/20 rounded-full flex items-center justify-center mb-3 text-salsa">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Rápido y Caliente</h3>
+                    <p class="text-gray-400 text-sm">Siempre recién hechos al momento.</p>
+                </div>
+                <div class="flex flex-col items-center p-4 benefit-item">
+                    <div class="w-12 h-12 bg-maiz/20 rounded-full flex items-center justify-center mb-3 text-maiz">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Ambiente Familiar</h3>
+                    <p class="text-gray-400 text-sm">Un lugar seguro para disfrutar con los tuyos.</p>
+                </div>
+                <div class="flex flex-col items-center p-4 benefit-item">
+                    <div class="w-12 h-12 bg-pastor/20 rounded-full flex items-center justify-center mb-3 text-pastor">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Entrega Local</h3>
+                    <p class="text-gray-400 text-sm">$25 MXN extra en Iztapalapa.</p>
+                </div>
+            </div>
         </div>
-        <button id="clearCart" class="hidden rounded-lg border border-borde px-4 py-2 text-sm font-semibold text-gris hover:border-salsa hover:text-salsa">Vaciar carrito</button>
-      </div>
-      <div id="categoryTabs" class="no-scrollbar mb-8 flex gap-2 overflow-x-auto pb-2"></div>
-      <div id="menuGrid" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3"></div>
-    </div>
-  </section>
+    </section>
 
-  <section class="bg-seccion py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
-        <div>
-          <p class="font-bold tracking-widest text-salsa text-sm">A TU GUSTO</p>
-          <h2 class="mt-2 text-3xl font-black text-carbon sm:text-4xl">Cada taco, como a ti te gusta.</h2>
-          <p class="mt-4 text-lg text-gris">Con cebolla o sin cebolla, con cilantro o sin cilantro, y las salsas que se te antojen: guacamole, mora, martajada o roja.</p>
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-seccion">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 section-header">
+                <h2 class="font-display text-4xl md:text-5xl font-black text-carbon mb-4">Nuestro Menú</h2>
+                <p class="text-gris max-w-2xl mx-auto">Selecciona tu antojo favorito. Todos nuestros tacos están hechos con tortilla de maíz hecha a mano y los mejores ingredientes.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12" id="menuTabs">
+                <button class="tab-btn active px-6 py-2 rounded-full border-2 border-borde font-bold text-carbon transition-all hover:border-salsa" data-category="tacos">Tacos</button>
+                <button class="tab-btn px-6 py-2 rounded-full border-2 border-borde font-bold text-carbon transition-all hover:border-salsa" data-category="gringas">Gringas & Volcanes</button>
+                <button class="tab-btn px-6 py-2 rounded-full border-2 border-borde font-bold text-carbon transition-all hover:border-salsa" data-category="bebidas">Bebidas</button>
+                <button class="tab-btn px-6 py-2 rounded-full border-2 border-borde font-bold text-carbon transition-all hover:border-salsa" data-category="extras">Extras</button>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="menuGrid">
+                <!-- Items injected via JS -->
+            </div>
         </div>
-        <div class="grid gap-3 sm:grid-cols-4">
-          <div class="rounded-2xl bg-white p-4 text-center shadow-sm"><span class="text-3xl">1️⃣</span><p class="mt-2 font-bold">Elige</p><p class="text-xs text-gris">Tu platillo y carne</p></div>
-          <div class="rounded-2xl bg-white p-4 text-center shadow-sm"><span class="text-3xl">2️⃣</span><p class="mt-2 font-bold">Personaliza</p><p class="text-xs text-gris">Cebolla, cilantro y salsa</p></div>
-          <div class="rounded-2xl bg-white p-4 text-center shadow-sm"><span class="text-3xl">3️⃣</span><p class="mt-2 font-bold">Agrega</p><p class="text-xs text-gris">Al carrito</p></div>
-          <div class="rounded-2xl bg-white p-4 text-center shadow-sm"><span class="text-3xl">4️⃣</span><p class="mt-2 font-bold">Envía</p><p class="text-xs text-gris">Tu resumen por WhatsApp</p></div>
+    </section>
+
+    <!-- Customization / Service Section -->
+    <section id="servicios" class="py-20 bg-crema overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 relative service-image">
+                    <div class="absolute inset-0 bg-maiz/20 rounded-3xl transform rotate-3"></div>
+                    <img src="https://image.qwenlm.ai/public_source/f67ca376-ec04-415a-9e63-2292203c793d/070acdd58-a5be-4639-ab0c-e67cba7591232490.png" alt="Preparación de tacos" class="relative rounded-3xl shadow-xl w-full object-cover h-[400px]" loading="lazy" width="600" height="400">
+                </div>
+                <div class="order-1 md:order-2 space-y-6 service-content">
+                    <h2 class="font-display text-4xl font-black text-carbon">¿Taquiza o Domicilio?</h2>
+                    <p class="text-gris text-lg">
+                        Llevamos el sabor de La Tía a donde estés. Ya sea para una reunión familiar o una cena rápida, tenemos la opción perfecta para ti.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm border border-borde hover:border-salsa transition-colors">
+                            <div class="bg-salsa/10 p-3 rounded-lg text-salsa">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-carbon text-lg">Servicio a Domicilio</h4>
+                                <p class="text-gris text-sm">Costo adicional de $25 MXN. Sujeto a disponibilidad y zona de cobertura en Iztapalapa.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 bg-white rounded-xl shadow-sm border border-borde hover:border-salsa transition-colors">
+                            <div class="bg-maiz/10 p-3 rounded-lg text-maizDark">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-carbon text-lg">Paquetes para Eventos</h4>
+                                <p class="text-gris text-sm">Pregunta por nuestras taquizas para cumpleaños y reuniones. ¡Precios especiales!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <a href="https://wa.me/5215565097372?text=Hola,%20quisiera%20información%20sobre%20taquizas" target="_blank" class="inline-flex items-center gap-2 text-salsa font-bold hover:underline">
+                            Cotizar Taquiza por WhatsApp 
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-salsa text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 footer-wave"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="font-display text-4xl font-black text-center mb-12">Lo que dicen nuestros clientes</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+                    <div class="flex text-maiz mb-4">
+                        ★★★★★
+                    </div>
+                    <p class="text-lg italic mb-6">"Los mejores tacos al pastor de Iztapalapa, sin duda. La carne tiene un sabor increíble y las tortillas son suavecitas. ¡Como en casa de la abuela!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-maiz rounded-full flex items-center justify-center text-carbon font-bold">MR</div>
+                        <span class="font-bold">María R.</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+                    <div class="flex text-maiz mb-4">
+                        ★★★★★
+                    </div>
+                    <p class="text-lg italic mb-6">"Pedí a domicilio y llegó todo caliente y rápido. Las gringas de chicharrón prensado son una locura. Totalmente recomendado."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-maiz rounded-full flex items-center justify-center text-carbon font-bold">JL</div>
+                        <span class="font-bold">Jorge L.</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+                    <div class="flex text-maiz mb-4">
+                        ★★★★★
+                    </div>
+                    <p class="text-lg italic mb-6">"El lugar tiene un ambiente muy bonito y familiar. Los precios son justos y la atención es de primera. Volveremos pronto."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-maiz rounded-full flex items-center justify-center text-carbon font-bold">AS</div>
+                        <span class="font-bold">Ana S.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & FAQ -->
+    <section id="ubicacion" class="py-20 bg-crema">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Map & Info -->
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="font-display text-4xl font-black text-carbon mb-4">Visítanos</h2>
+                        <p class="text-gris mb-6">Estamos ubicados en el corazón de Iztapalapa. Te esperamos con los brazos abiertos y la plancha caliente.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 text-salsa">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-carbon">Dirección</h4>
+                                    <p class="text-gris">Batallones Rojos esquina Revolución Social,<br>Iztapalapa, Ciudad de México.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 text-salsa">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-carbon">Horario</h4>
+                                    <p class="text-gris">Lunes a Domingo<br>5:00 PM - 12:00 AM</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 text-salsa">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-carbon">Métodos de Pago</h4>
+                                    <p class="text-gris">Efectivo y Transferencia Bancaria.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Embedded Map Placeholder -->
+                    <div class="w-full h-64 bg-gray-200 rounded-2xl overflow-hidden relative group cursor-pointer" onclick="window.open('https://maps.google.com/?q=Batallones+Rojos+esquina+Revolución+Social+Iztapalapa', '_blank')">
+                        <iframe 
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0" 
+                            scrolling="no" 
+                            marginheight="0" 
+                            marginwidth="0" 
+                            src="https://maps.google.com/maps?q=Batallones%20Rojos%20esquina%20Revoluci%C3%B3n%20Social%20Iztapalapa&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            class="grayscale group-hover:grayscale-0 transition-all duration-500">
+                        </iframe>
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent transition-colors pointer-events-none">
+                            <span class="bg-white text-carbon px-4 py-2 rounded-full font-bold shadow-lg opacity-100 group-hover:opacity-0 transition-opacity">Ver en Google Maps</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ -->
+                <div class="bg-seccion p-8 rounded-3xl border border-borde">
+                    <h3 class="font-display text-2xl font-bold text-carbon mb-6">Preguntas Frecuentes</h3>
+                    
+                    <div class="space-y-4" id="faqContainer">
+                        <details class="group bg-white rounded-xl border border-borde overflow-hidden">
+                            <summary class="flex justify-between items-center p-4 cursor-pointer font-medium text-carbon list-none">
+                                <span>¿Hacen entregas a domicilio?</span>
+                                <span class="transition-transform group-open:rotate-180">▼</span>
+                            </summary>
+                            <div class="px-4 pb-4 text-gris text-sm border-t border-borde/50 pt-2">
+                                Sí, realizamos entregas en zonas cercanas a Iztapalapa. El costo es de $25 MXN extra y está sujeto a confirmación de disponibilidad.
+                            </div>
+                        </details>
+
+                        <details class="group bg-white rounded-xl border border-borde overflow-hidden">
+                            <summary class="flex justify-between items-center p-4 cursor-pointer font-medium text-carbon list-none">
+                                <span>¿Aceptan tarjetas de crédito?</span>
+                                <span class="transition-transform group-open:rotate-180">▼</span>
+                            </summary>
+                            <div class="px-4 pb-4 text-gris text-sm border-t border-borde/50 pt-2">
+                                Por el momento solo aceptamos efectivo y transferencias bancarias. Estamos trabajando para implementar terminal punto de venta pronto.
+                            </div>
+                        </details>
+
+                        <details class="group bg-white rounded-xl border border-borde overflow-hidden">
+                            <summary class="flex justify-between items-center p-4 cursor-pointer font-medium text-carbon list-none">
+                                <span>¿Tienen opciones vegetarianas?</span>
+                                <span class="transition-transform group-open:rotate-180">▼</span>
+                            </summary>
+                            <div class="px-4 pb-4 text-gris text-sm border-t border-borde/50 pt-2">
+                                Actualmente nuestro menú es especializado en carnes, pero puedes pedir tacos de nopales o papas (sujetos a disponibilidad del día). Pregunta a nuestro personal.
+                            </div>
+                        </details>
+
+                        <details class="group bg-white rounded-xl border border-borde overflow-hidden">
+                            <summary class="flex justify-between items-center p-4 cursor-pointer font-medium text-carbon list-none">
+                                <span>¿Puedo reservar para un evento grande?</span>
+                                <span class="transition-transform group-open:rotate-180">▼</span>
+                            </summary>
+                            <div class="px-4 pb-4 text-gris text-sm border-t border-borde/50 pt-2">
+                                ¡Claro! Contáctanos por WhatsApp para cotizar paquetes de taquizas para tus fiestas y reuniones.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-carbon text-crema pt-16 pb-8 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5 footer-wave"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-salsa rounded-full flex items-center justify-center text-white font-display font-bold">T</div>
+                        <span class="font-display font-bold text-xl">Taquería La Tía</span>
+                    </div>
+                    <p class="text-gray-400 max-w-sm mb-6">
+                        Manteniendo viva la tradición del taco mexicano en Iztapalapa. Calidad, sabor y atención familiar desde el primer día.
+                    </p>
+                    <div class="flex gap-4">
+                        <!-- Social Placeholders -->
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-salsa transition-colors">FB</a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-salsa transition-colors">IG</a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-salsa transition-colors">TW</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-maiz">Enlaces</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#inicio" class="hover:text-white transition-colors">Inicio</a></li>
+                        <li><a href="#menu" class="hover:text-white transition-colors">Menú</a></li>
+                        <li><a href="#servicios" class="hover:text-white transition-colors">Servicios</a></li>
+                        <li><a href="#ubicacion" class="hover:text-white transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-maiz">Contacto</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            +52 1 55 6509 7372
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            Iztapalapa, CDMX
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2026 Taquería La Tía. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div id="cartBackdrop" class="fixed inset-0 bg-black/50 z-[60] backdrop-blur-sm" onclick="toggleCart()"></div>
+    <div id="cartDrawer" class="fixed top-0 right-0 w-full max-w-md h-full bg-crema z-[70] shadow-2xl flex flex-col">
+        <div class="p-6 border-b border-borde flex justify-between items-center bg-white">
+            <h2 class="font-display text-2xl font-bold text-carbon">Tu Orden</h2>
+            <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <svg class="w-6 h-6 text-carbon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto p-6 space-y-4" id="cartItems">
+            <!-- Cart items injected here -->
+            <div class="text-center text-gris mt-20 empty-cart-msg">
+                <svg class="w-16 h-16 mx-auto mb-4 text-borde" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                <p>Tu carrito está vacío.</p>
+                <p class="text-sm mt-2">¡Agrega unos tacos deliciosos!</p>
+            </div>
+        </div>
+
+        <div class="p-6 border-t border-borde bg-white space-y-4">
+            <div class="flex justify-between text-lg font-bold text-carbon">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button onclick="checkout()" class="w-full bg-salsa text-white py-4 rounded-xl font-bold text-lg hover:bg-salsaDark transition-colors shadow-lg shadow-salsa/30">
+                Enviar Pedido por WhatsApp
+            </button>
+            <p class="text-xs text-center text-gris">Te redirigiremos a WhatsApp para confirmar tu pedido y pago.</p>
+        </div>
     </div>
-  </section>
 
-  <section class="py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="rounded-3xl bg-carbon p-8 text-white sm:p-12">
-        <p class="font-bold tracking-widest text-maiz text-sm">SERVICIO A DOMICILIO</p>
-        <h2 class="mt-2 text-3xl font-black sm:text-4xl">¿Se te antojó desde casa?</h2>
-        <p class="mt-4 max-w-2xl text-white/80">Arma tu pedido, elige servicio a domicilio y comparte tu dirección al finalizar. El envío tiene un costo extra de $25 MXN. La disponibilidad, total y tiempo de entrega se confirman por WhatsApp.</p>
-        <a href="#menu" class="mt-6 inline-block rounded-xl bg-maiz px-6 py-3 font-bold text-carbon hover:bg-yellow-400">Armar pedido</a>
-      </div>
-    </div>
-  </section>
+    <!-- Scripts -->
+    <script>
+        // --- Data ---
+        const menuData = [
+            // Tacos
+            { id: 1, name: "Taco al Pastor", price: 25, category: "tacos", desc: "Carne marinada, piña, cilantro y cebolla.", img: "https://image.qwenlm.ai/public_source/f67ca376-ec04-415a-9e63-2292203c793d/370acdd58-a5be-4639-ab0c-e67cba7591239084.png" },
+            { id: 2, name: "Taco de Suadero", price: 25, category: "tacos", desc: "Suadero jugoso cocinado lentamente, cilantro y cebolla.", img: "https://image.qwenlm.ai/public_source/f67ca376-ec04-415a-9e63-2292203c793d/570acdd58-a5be-4639-ab0c-e67cba7591239528.png" },
+            { id: 3, name: "Taco de Bistec", price: 25, category: "tacos", desc: "Bistec de res a la plancha con verduras.", img: "https://image.qwenlm.ai/public_source/f67ca376-ec04-415a-9e63-2292203c793d/170acdd58-a5be-4639-ab0c-e67cba7591239357.png" },
+            { id: 4, name: "Taco de Chorizo", price: 25, category: "tacos", desc: "Chorizo artesanal con papas o nopales.", img: "https://image.qwenlm.ai/public_source/f67ca376-ec04-415a-9e63-2292203c793d/670acdd58-a5be-4639-ab0c-e67cba7591237213.png" },
+            { id: 5, name: "Taco de Chicharrón", price: 25, category: "tacos", desc: "Chicharrón prensado en salsa verde o roja.", img: "https://image.qwenlm.ai/public_source/f67ca376-ec04-415a-9e63-2292203c793d/070acdd58-a5be-4639-ab0c-e67cba7591239112.png" },
+            { id: 6, name: "Taco de Cabeza", price: 25, category: "tacos", desc: "Cabeza de res suave y llena de sabor.", img: "https://image.qwenlm.ai/public_source/f67ca376-ec04-415a-9e63-2292203c793d/770acdd58-a5be-4639-ab0c-e67cba7591238318.png" },
+            
+            // Gringas & Volcanes
+            { id: 7, name: "Gringa de Pastor", price: 45, category: "gringas", desc: "Tortilla de harina, queso fundido y pastor.", img: "https://image.qwenlm.ai/public_source/f67ca376-ec04-415a-9e63-2292203c793d/170acdd58-a5be-4639-ab0c-e67cba7591239843.png" },
+            { id: 8, name: "Volcán de Bistec", price: 40, category: "gringas", desc: "Tortilla tostada con queso, bistec y pico de gallo.", img: "https://image.qwenlm.ai/public_source/f67ca376-ec04-415a-9e63-2292203c793d/570acdd58-a5be-4639-ab0c-e67cba7591236599.png" },
+            
+            // Bebidas
+            { id: 9, name: "Agua de Horchata", price: 25, category: "bebidas", desc: "Refrescante agua de arroz con canela.", img: "https://placehold.co/600x400/E8DED2/5C5C5C?text=Horchata" },
+            { id: 10, name: "Agua de Jamaica", price: 25, category: "bebidas", desc: "Concentrado natural de flor de jamaica.", img: "https://placehold.co/600x400/C81D25/FFFFFF?text=Jamaica" },
+            { id: 11, name: "Refresco", price: 30, category: "bebidas", desc: "Coca-Cola, Sprite, Fanta (600ml).", img: "https://placehold.co/600x400/1E1E1E/FFFFFF?text=Refresco" },
+            
+            // Extras
+            { id: 12, name: "Orden de Nopales", price: 35, category: "extras", desc: "Nopales asados con cebolla y cilantro.", img: "https://placehold.co/600x400/2E7D32/FFFFFF?text=Nopales" },
+            { id: 13, name: "Guacamole", price: 40, category: "extras", desc: "Hecho al momento con aguacate fresco.", img: "https://placehold.co/600x400/2E7D32/FFFFFF?text=Guacamole" },
+        ];
 
-  <section id="taquizas" class="scroll-mt-20 bg-seccion py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="mb-10 max-w-3xl">
-        <p class="font-bold tracking-widest text-salsa text-sm">PARA EVENTOS, REUNIONES Y CELEBRACIONES</p>
-        <h2 class="mt-2 text-3xl font-black text-carbon sm:text-4xl">Taquizas para compartir momentos grandes.</h2>
-        <p class="mt-4 text-lg text-gris">Llevamos el sabor de Taquería La Tía a tu evento con opciones de servicio completo, puro taco o parrilla. Cuéntanos fecha, número de personas y ubicación aproximada para confirmar disponibilidad y preparar una cotización.</p>
-      </div>
-      <div id="taquizaGrid" class="grid gap-6 lg:grid-cols-3"></div>
-    </div>
-  </section>
+        let cart = [];
 
-  <section class="py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="mb-8 text-center"><p class="font-bold tracking-widest text-salsa text-sm">FAMILIA LA TÍA</p><h2 class="mt-2 text-3xl font-black text-carbon">Hecho para compartir en familia.</h2><p class="mt-3 text-gris">Mensajes compartidos por la familia de Taquería La Tía.</p></div>
-      <div class="grid gap-6 md:grid-cols-3">
-        <figure class="rounded-2xl border border-borde bg-white p-6 shadow-sm"><blockquote class="text-gris">“En La Tía me gusta que puedes armar cada taco a tu gusto: con o sin cebolla, con las salsas que se te antojen y siempre listo para compartir.”</blockquote><figcaption class="mt-4 font-bold text-carbon">Abraham Soriano</figcaption></figure>
-        <figure class="rounded-2xl border border-borde bg-white p-6 shadow-sm"><blockquote class="text-gris">“Las especialidades son perfectas cuando queremos algo diferente: una gringa, una torta o unos volcanes con mucho sabor.”</blockquote><figcaption class="mt-4 font-bold text-carbon">Claudia Noguez</figcaption></figure>
-        <figure class="rounded-2xl border border-borde bg-white p-6 shadow-sm"><blockquote class="text-gris">“Nos gustan las aguas frescas y pedir tacos para compartir en familia.”</blockquote><figcaption class="mt-4 font-bold text-carbon">Melanie y Yael Soriano</figcaption></figure>
-      </div>
-    </div>
-  </section>
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenu('tacos');
+            initAnimations();
+            setupTabs();
+            setupFAQ();
+        });
 
-  <section id="ubicacion" class="scroll-mt-20 bg-seccion py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="grid gap-8 lg:grid-cols-2">
-        <div><p class="font-bold tracking-widest text-salsa text-sm">UBICACIÓN</p><h2 class="mt-2 text-3xl font-black text-carbon">Encuentra el antojo en Iztapalapa.</h2><p class="mt-4 text-lg text-gris">Batallones Rojos esquina Revolución Social, Iztapalapa, Ciudad de México.</p><p class="mt-3 font-semibold text-carbon">🕒 Lunes a domingo · 5:00 pm a 12:00 am</p><a class="mt-6 inline-block rounded-xl bg-salsa px-6 py-3 font-bold text-white hover:bg-red-700" href="https://wa.me/5215565097372?text=Hola%2C%20%C2%BFme%20pueden%20compartir%20la%20ubicaci%C3%B3n%20exacta%20de%20Taquer%C3%ADa%20La%20T%C3%ADa%3F" target="_blank" rel="noopener">Pedir ubicación por WhatsApp</a></div>
-        <div class="pattern rounded-3xl border border-borde bg-white p-8 shadow-sm"><div class="flex h-full min-h-56 flex-col items-center justify-center text-center"><span class="text-6xl">📍</span><h3 class="mt-4 text-xl font-black">Taquería La Tía</h3><p class="mt-2 text-gris">Batallones Rojos esq. Revolución Social<br>Iztapalapa, CDMX</p><p class="mt-5 text-sm text-gris">Mapa disponible al configurar el enlace oficial de Google Maps.</p></div></div>
-      </div>
-    </div>
-  </section>
+        // --- Menu Logic ---
+        function renderMenu(category) {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = '';
+            
+            const filtered = menuData.filter(item => item.category === category);
+            
+            filtered.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'menu-card bg-white rounded-2xl overflow-hidden shadow-sm border border-borde flex flex-col h-full opacity-0'; // Start hidden for GSAP
+                card.innerHTML = `
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover" loading="lazy" width="400" height="300">
+                        <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full font-bold text-salsa shadow-sm">
+                            $${item.price}
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="font-display font-bold text-xl text-carbon mb-2">${item.name}</h3>
+                        <p class="text-gris text-sm mb-4 flex-1">${item.desc}</p>
+                        <button onclick="addToCart(${item.id})" class="w-full py-2 border-2 border-salsa text-salsa font-bold rounded-lg hover:bg-salsa hover:text-white transition-colors flex items-center justify-center gap-2 group">
+                            <span>Agregar</span>
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+                
+                // Animate entry
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    delay: index * 0.1,
+                    ease: "power2.out",
+                    onStart: () => { card.style.transform = 'translateY(20px)'; }
+                });
+            });
+        }
 
-  <section id="faq" class="scroll-mt-20 py-16">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <div class="mb-8 text-center"><p class="font-bold tracking-widest text-salsa text-sm">DUDAS</p><h2 class="mt-2 text-3xl font-black text-carbon">Preguntas frecuentes.</h2></div>
-      <div id="faqList" class="space-y-3"></div>
-    </div>
-  </section>
-</main>
+        function setupTabs() {
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    // Update UI
+                    tabs.forEach(t => t.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    // Animate Tab
+                    gsap.from(e.target, { scale: 0.9, duration: 0.3, ease: "back.out(1.4)" });
+                    
+                    // Render Content
+                    const category = e.target.dataset.category;
+                    renderMenu(category);
+                });
+            });
+        }
 
-<footer class="bg-carbon py-10 text-white">
-  <div class="mx-auto grid max-w-7xl gap-7 px-4 sm:px-6 md:grid-cols-3">
-    <div><h3 class="text-xl font-black">Taquería La Tía</h3><p class="mt-2 text-white/70">Tacos que se disfrutan como en familia.</p></div>
-    <div><p class="font-bold">Contacto</p><a class="mt-2 block text-white/70 hover:text-maiz" href="https://wa.me/5215565097372" target="_blank" rel="noopener">WhatsApp: +52 1 55 6509 7372</a><p class="mt-1 text-sm text-white/70">Lunes a domingo · 5:00 pm a 12:00 am</p></div>
-    <div><p class="font-bold">Información</p><a class="mt-2 block text-sm text-white/70 hover:text-maiz" href="#faq">Preguntas frecuentes</a><a class="mt-1 block text-sm text-white/70 hover:text-maiz" href="#taquizas">Taquizas</a><p class="mt-4 text-xs text-white/50">© 2026 Taquería La Tía.</p></div>
-  </div>
-</footer>
+        // --- Cart Logic ---
+        function addToCart(id) {
+            const item = menuData.find(i => i.id === id);
+            const existing = cart.find(i => i.id === id);
+            
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...item, qty: 1 });
+            }
+            
+            updateCartUI();
+            
+            // Animation feedback
+            const btn = event.currentTarget;
+            gsap.to(btn, { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 });
+            
+            // Bounce cart icon
+            gsap.to('#cartCount', { scale: 1.4, duration: 0.15, yoyo: true, repeat: 1, ease: "power1.inOut" });
+            
+            // Open cart briefly or show toast (optional, here we just update count)
+            const countBadge = document.getElementById('cartCount');
+            if(cart.reduce((acc, item) => acc + item.qty, 0) > 0) {
+                countBadge.classList.remove('scale-0');
+            }
+        }
 
-<aside id="cartDrawer" class="fixed inset-y-0 right-0 z-50 hidden w-full max-w-md overflow-y-auto bg-crema shadow-2xl" aria-label="Carrito de compras">
-  <div class="sticky top-0 z-10 flex items-center justify-between border-b border-borde bg-crema p-4"><h2 class="text-xl font-black">Tu carrito</h2><button id="closeCart" class="rounded-lg p-2 text-2xl hover:bg-seccion" aria-label="Cerrar carrito">×</button></div>
-  <div id="cartContent" class="p-4"></div>
-</aside>
-<div id="cartBackdrop" class="fixed inset-0 z-40 hidden bg-black/40"></div>
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartUI();
+        }
 
-<script>
-const SITE={whatsapp:'5215565097372',deliveryFee:25};
-const categories=[
-['tacos','🌮','Tacos de maíz'],['tacos-harina','🫓','Tacos de harina'],['tortas','🥪','Tortas'],['gringas','🧀','Gringas'],['burritas','🌯','Burritas'],['volcanes','🔥','Volcanes'],['quesadillas','🫓','Quesadillas'],['burros','🌯','Burros'],['costra','🧀','Costra de queso'],['chimichanga','✨','Chimichanga'],['nopal','🌵','Nopal zapoteco'],['alambres','🍳','Alambres'],['aguas','🥤','Aguas frescas']
-];
-const meat=(prices,cheese)=>Object.entries(prices).map(([id,price])=>({id,label:id.charAt(0).toUpperCase()+id.slice(1),price,cheesePrice:cheese?cheese[id]:null}));
-const menu=[
-{id:'tacos',cat:'tacos',name:'Tacos de maíz',desc:'Tortilla de maíz al comal. c/q = con queso.',img:'https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/taco%20de%20pastor.webp',variants:meat({pastor:15,suadero:15,longaniza:15,bistec:17,campechano:17,arrachera:25},{pastor:25,suadero:25,longaniza:25,bistec:25,campechano:25,arrachera:35}),cheese:true},
-{id:'harina',cat:'tacos-harina',name:'Tacos de harina',desc:'Tortilla de harina suave con carne al comal.',img:'https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/tacos.webp',variants:meat({pastor:30,suadero:30,longaniza:30,bistec:35,campechano:35,arrachera:40})},
-{id:'tortas',cat:'tortas',name:'Tortas',desc:'Telera con carne al comal. c/q = con queso.',img:'https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/torta.webp',variants:meat({pastor:50,longaniza:50,bistec:60,suadero:60,campechana:60,arrachera:70},{pastor:60,longaniza:60,bistec:70,suadero:70,campechana:70,arrachera:80}),cheese:true},
-{id:'gringas',cat:'gringas',name:'Gringas',desc:'Queso fundido y carne en tortilla de harina.',img:'https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/gringa.webp',variants:meat({pastor:60,longaniza:60,bistec:70,suadero:70,campechana:70,arrachera:80})},
-{id:'burritas',cat:'burritas',name:'Burritas',desc:'Tortilla de harina enrollada y bien rellena.',variants:meat({pastor:60,longaniza:60,bistec:70,suadero:70,campechana:70,arrachera:80})},
-{id:'volcanes',cat:'volcanes',name:'Volcanes',desc:'Tostada crujiente con queso y carne.',img:'https://raw.githubusercontent.com/impulsoshiva-source/cdn_assets/main/Taqueria%20la%20tia/assets/menu/volcan.webp',variants:meat({pastor:60,longaniza:60,bistec:70,suadero:70,campechano:70,arrachera:80})},
-{id:'quesadillas',cat:'quesadillas',name:'Quesadillas de harina',desc:'Tortilla de harina con queso fundido y carne.',variants:meat({pastor:50,longaniza:50,bistec:60,suadero:60,campechana:60,arrachera:65})},
-{id:'burros',cat:'burros',name:'Burros',desc:'Burro grande para hambre grande.',variants:meat({pastor:80,longaniza:80,bistec:90,suadero:90,campechano:90,arrachera:120})},
-{id:'costra',cat:'costra',name:'Costra de queso',desc:'Queso dorado y crujiente envolviendo carne.',variants:meat({pastor:80,longaniza:80,bistec:90,suadero:90,campechano:90,arrachera:120})},
-{id:'chimichanga',cat:'chimichanga',name:'Chimichanga',desc:'Tortilla de harina dorada y crujiente.',variants:meat({pastor:80,longaniza:80,bistec:90,suadero:90,campechano:90,arrachera:120})},
-{id:'nopal',cat:'nopal',name:'Nopal zapoteco',desc:'Nopal asado con carne al comal.',variants:meat({pastor:80,longaniza:80,bistec:90,suadero:90,campechano:90,arrachera:120})},
-{id:'alambres',cat:'alambres',name:'Alambres',desc:'Para compartir. Consulta ingredientes al confirmar.',variants:[{id:'chico',label:'Chico · 2 personas',price:150},{id:'mediano',label:'Mediano · 3 personas',price:200},{id:'grande',label:'Grande · 4 personas',price:250},{id:'familiar',label:'Familiar · 6 personas',price:300}]},
-{id:'horchata',cat:'aguas',name:'Agua de horchata',desc:'1 litro bien frío.',variants:[{id:'litro',label:'1 litro',price:40}],drink:true},
-{id:'jamaica',cat:'aguas',name:'Agua de jamaica',desc:'1 litro bien frío.',variants:[{id:'litro',label:'1 litro',price:40}],drink:true},
-{id:'guayaba',cat:'aguas',name:'Agua de guayaba con limón',desc:'1 litro bien frío.',variants:[{id:'litro',label:'1 litro',price:40}],drink:true}
-];
-const taquizas=[
-{name:'Servicio completo',items:['Trompo al pastor, bistec, longaniza y suadero','Quesillo, tostadas, bolillos y tortillas de harina','Tres tipos de salsa, guacamole, salsa roja y martajada','Limones, pepinos, cebollitas con nopales','Desechables y servilletas','Promedio de 10 tacos por persona','Gringas, tortas, burritas y volcanes','Servicio estimado de tres horas']},
-{name:'Servicio de puro taco',items:['Trompo al pastor, bistec, longaniza y suadero','Tres tipos de salsa, guacamole, salsa roja y martajada','Limones, pepinos, cebollitas con nopales','Desechables y servilletas','Promedio de 10 tacos por persona','Servicio estimado de tres horas']},
-{name:'Servicio de parrilla',items:['Ocho carnes: arrachera, bistec, longaniza, chorizo argentino, carne enchilada, pechuga, chuleta y chistorra','Frijoles, papas, nopales, pico de gallo, guacamole, martajada, limones y pápalo','Promedio de 5 a 6 tacos por persona','Tortilla normal','Servicio estimado de tres horas']}
-];
-let activeCat='tacos'; let cart=JSON.parse(localStorage.getItem('latia-cart')||'[]');
-const esc=s=>String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-function money=n=>new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0}).format(n);
-function renderTabs(){document.getElementById('categoryTabs').innerHTML=categories.map(([id,icon,label])=>`<button data-cat="${id}" class="shrink-0 rounded-full border px-4 py-2 text-sm font-bold ${id===activeCat?'border-salsa bg-salsa text-white':'border-borde bg-white text-gris hover:border-salsa'}">${icon} ${label}</button>`).join('');document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{activeCat=b.dataset.cat;renderMenu();renderTabs()})}
-function renderMenu(){const items=menu.filter(x=>x.cat===activeCat);document.getElementById('menuGrid').innerHTML=items.map(item=>`<article class="overflow-hidden rounded-2xl border border-borde bg-white shadow-sm">${item.img?`<img class="h-44 w-full object-cover" src="${item.img}" alt="${esc(item.name)} de Taquería La Tía">`:`<div class="pattern flex h-32 items-center justify-center bg-seccion text-5xl">🌮</div>`}<div class="p-5"><h3 class="text-xl font-black">${esc(item.name)}</h3><p class="mt-1 min-h-12 text-sm text-gris">${esc(item.desc)}</p><p class="mt-3 font-bold text-salsa">Desde ${money(Math.min(...item.variants.map(v=>v.price)))}</p><button data-item="${item.id}" class="mt-4 w-full rounded-xl bg-salsa px-4 py-3 font-bold text-white hover:bg-red-700">Personalizar y agregar</button></div></article>`).join('');document.querySelectorAll('[data-item]').forEach(b=>b.onclick=()=>showCustomizer(menu.find(x=>x.id===b.dataset.item)))}
-function showCustomizer(item){const variant=item.variants[0];const options=item.variants.map(v=>`<option value="${v.id}">${esc(v.label)} — ${money(v.price)}</option>`).join('');const cheese=item.cheese?`<label class="mt-3 flex items-center gap-2"><input id="cheese" type="checkbox"> <span>Con queso <span class="text-gris text-sm">(según carne)</span></span></label>`:'';const prefs=item.drink?'':`<div class="mt-4 grid gap-3 sm:grid-cols-2"><fieldset><legend class="font-bold">Cebolla</legend><label class="mr-3"><input name="onion" type="radio" value="Con cebolla" checked> Con cebolla</label><label><input name="onion" type="radio" value="Sin cebolla"> Sin cebolla</label></fieldset><fieldset><legend class="font-bold">Cilantro</legend><label class="mr-3"><input name="cilantro" type="radio" value="Con cilantro" checked> Con cilantro</label><label><input name="cilantro" type="radio" value="Sin cilantro"> Sin cilantro</label></fieldset></div><fieldset class="mt-4"><legend class="font-bold">Salsas</legend><div class="mt-2 flex flex-wrap gap-2"><label class="rounded-full border border-borde px-3 py-1 text-sm"><input class="salsa" type="checkbox" value="Guacamole"> Guacamole</label><label class="rounded-full border border-borde px-3 py-1 text-sm"><input class="salsa" type="checkbox" value="Salsa mora"> Salsa mora</label><label class="rounded-full border border-borde px-3 py-1 text-sm"><input class="salsa" type="checkbox" value="Salsa martajada"> Martajada</label><label class="rounded-full border border-borde px-3 py-1 text-sm"><input class="salsa" type="checkbox" value="Salsa roja"> Roja</label><label class="rounded-full border border-borde px-3 py-1 text-sm"><input id="noSalsa" type="checkbox"> Sin salsa</label></div></fieldset>`;document.getElementById('cartContent').innerHTML=`<div><button id="backMenu" class="mb-4 text-sm font-bold text-salsa">← Volver al menú</button><h2 class="text-2xl font-black">${esc(item.name)}</h2><p class="mt-1 text-sm text-gris">${esc(item.desc)}</p><label class="mt-4 block font-bold">Elige tu opción<select id="variant" class="mt-1 w-full rounded-lg border border-borde bg-white p-3">${options}</select></label>${cheese}${prefs}<label class="mt-4 block font-bold">Cantidad<div class="mt-1 flex items-center gap-3"><button id="minus" class="rounded-lg border border-borde px-3 py-1" type="button">−</button><span id="qty" class="min-w-8 text-center font-bold">1</span><button id="plus" class="rounded-lg border border-borde px-3 py-1" type="button">+</button></div></label><label class="mt-4 block font-bold">Nota opcional<textarea id="note" maxlength="140" class="mt-1 w-full rounded-lg border border-borde p-3 text-sm" placeholder="Ej. sin limón"></textarea></label><button id="addCart" class="mt-5 w-full rounded-xl bg-salsa px-4 py-3 font-bold text-white hover:bg-red-700">Agregar al carrito</button></div>`;openCart();let qty=1;document.getElementById('minus').onclick=()=>{qty=Math.max(1,qty-1);document.getElementById('qty').textContent=qty};document.getElementById('plus').onclick=()=>{qty++;document.getElementById('qty').textContent=qty};const noS=document.getElementById('noSalsa');if(noS)noS.onchange=()=>{if(noS.checked)document.querySelectorAll('.salsa').forEach(x=>x.checked=false)};document.querySelectorAll('.salsa').forEach(x=>x.onchange=()=>{if(x.checked)noS.checked=false});document.getElementById('backMenu').onclick=renderCart;document.getElementById('addCart').onclick=()=>{const v=item.variants.find(v=>v.id===document.getElementById('variant').value);const withCheese=document.getElementById('cheese')?.checked||false;const price=withCheese&&v.cheesePrice?v.cheesePrice:v.price;const salsas=noS?.checked?['Sin salsa']:[...document.querySelectorAll('.salsa:checked')].map(x=>x.value);cart.push({id:crypto.randomUUID(),name:item.name,variant:v.label,price,qty,cheese:withCheese?'Con queso':'Sin queso',onion:item.drink?'':document.querySelector('input[name="onion"]:checked')?.value,cilantro:item.drink?'':document.querySelector('input[name="cilantro"]:checked')?.value,salsas:salsas.length?salsas:['Sin salsa'],note:document.getElementById('note').value});saveCart();renderCart();updateCount()}}
-function saveCart(){localStorage.setItem('latia-cart',JSON.stringify(cart))}function updateCount(){document.getElementById('cartCount').textContent=cart.reduce((a,x)=>a+x.qty,0);document.getElementById('clearCart').classList.toggle('hidden',!cart.length)}
-function renderCart(){const sub=cart.reduce((a,x)=>a+x.price*x.qty,0);if(!cart.length){document.getElementById('cartContent').innerHTML='<div class="py-12 text-center"><p class="text-5xl">🌮</p><h2 class="mt-4 text-xl font-black">Tu carrito está vacío</h2><p class="mt-2 text-gris">Agrega tus tacos y especialidades favoritas.</p><button id="goMenu" class="mt-5 rounded-xl bg-salsa px-5 py-3 font-bold text-white">Ver menú</button></div>';document.getElementById('goMenu').onclick=()=>{closeCart();document.getElementById('menu').scrollIntoView()};return}document.getElementById('cartContent').innerHTML=`<div class="space-y-4">${cart.map((x,i)=>`<div class="rounded-xl border border-borde p-3"><div class="flex justify-between gap-3"><div><p class="font-bold">${x.qty}x ${esc(x.name)}</p><p class="text-sm text-gris">${esc(x.variant)} · ${x.cheese}</p>${x.onion?`<p class="text-xs text-gris">${x.onion} · ${x.cilantro}</p>`:''}<p class="text-xs text-gris">Salsas: ${esc(x.salsas.join(', '))}</p>${x.note?`<p class="text-xs text-gris">Nota: ${esc(x.note)}</p>`:''}</div><div class="text-right"><p class="font-bold">${money(x.price*x.qty)}</p><button data-remove="${i}" class="mt-2 text-sm font-bold text-salsa">Eliminar</button></div></div></div>`).join('')}<div class="border-t border-borde pt-4"><p class="flex justify-between font-bold"><span>Subtotal</span><span>${money(sub)}</span></p><label class="mt-4 block font-bold">Modalidad<select id="mode" class="mt-1 w-full rounded-lg border border-borde bg-white p-3"><option value="pickup">Recoger en taquería</option><option value="delivery">Servicio a domicilio (+$25)</option></select></label><div id="deliveryFields" class="hidden"><label class="mt-3 block font-bold">Nombre<input id="customer" class="mt-1 w-full rounded-lg border border-borde p-3" placeholder="Tu nombre"></label><label class="mt-3 block font-bold">Dirección y referencias<textarea id="address" class="mt-1 w-full rounded-lg border border-borde p-3" placeholder="Calle, número y referencias"></textarea></label></div><label class="mt-3 block font-bold">Método de pago<select id="payment" class="mt-1 w-full rounded-lg border border-borde bg-white p-3"><option>Efectivo</option><option>Transferencia</option></select></label><label class="mt-3 block font-bold">Comentario general opcional<textarea id="comment" class="mt-1 w-full rounded-lg border border-borde p-3"></textarea></label><p id="totalLine" class="mt-4 flex justify-between text-lg font-black"><span>Total estimado</span><span>${money(sub)}</span></p><label class="mt-4 flex gap-2 text-sm text-gris"><input id="confirm" type="checkbox"> Entiendo que el pedido, disponibilidad, total final y tiempo de entrega se confirman por WhatsApp.</label><button id="sendOrder" class="mt-4 w-full rounded-xl bg-[#25D366] px-4 py-3 font-bold text-white hover:bg-green-600">Enviar pedido por WhatsApp</button></div></div>`;document.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.remove,1);saveCart();updateCount();renderCart()});const mode=document.getElementById('mode');const recalc=()=>{const total=sub+(mode.value==='delivery'?SITE.deliveryFee:0);document.getElementById('totalLine').innerHTML=`<span>Total estimado</span><span>${money(total)}</span>`;document.getElementById('deliveryFields').classList.toggle('hidden',mode.value!=='delivery')};mode.onchange=recalc;document.getElementById('sendOrder').onclick=()=>{if(!document.getElementById('confirm').checked){alert('Confirma que entiendes que el pedido se valida por WhatsApp.');return}const delivery=mode.value==='delivery';if(delivery&&(!document.getElementById('customer').value.trim()||!document.getElementById('address').value.trim())){alert('Para domicilio agrega tu nombre y dirección.');return}const total=sub+(delivery?SITE.deliveryFee:0);const lines=cart.map((x,i)=>`${i+1}. ${x.qty}x ${x.name} — ${x.variant} — ${x.cheese}\n   ${x.onion?`Cebolla: ${x.onion}\n   Cilantro: ${x.cilantro}\n   `:''}Salsas: ${x.salsas.join(', ')}${x.note?`\n   Nota: ${x.note}`:''}\n   Importe: ${money(x.price*x.qty)}`).join('\n\n');const text=`🌮 *NUEVO PEDIDO — TAQUERÍA LA TÍA*\n\n*Cliente:* ${delivery?document.getElementById('customer').value:'Por confirmar'}\n*Modalidad:* ${delivery?'Servicio a domicilio':'Recoger en taquería'}${delivery?`\n*Dirección y referencias:* ${document.getElementById('address').value}`:''}\n\n*PEDIDO*\n${lines}\n\n*Subtotal:* ${money(sub)}\n*Envío:* ${delivery?money(SITE.deliveryFee):money(0)}\n*Total estimado:* ${money(total)}\n\n*Método de pago preferido:* ${document.getElementById('payment').value}\n*Comentario general:* ${document.getElementById('comment').value||'Sin comentarios'}\n\nEntiendo que el pedido, disponibilidad, total final y tiempo de entrega deben confirmarse por WhatsApp. ¡Gracias!`;window.open(`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`,'_blank','noopener')}}
-function openCart(){document.getElementById('cartDrawer').classList.remove('hidden');document.getElementById('cartBackdrop').classList.remove('hidden')}function closeCart(){document.getElementById('cartDrawer').classList.add('hidden');document.getElementById('cartBackdrop').classList.add('hidden')}
-document.getElementById('cartButton').onclick=()=>{renderCart();openCart()};document.getElementById('closeCart').onclick=closeCart;document.getElementById('cartBackdrop').onclick=closeCart;document.getElementById('clearCart').onclick=()=>{if(confirm('¿Vaciar carrito?')){cart=[];saveCart();updateCount();renderCart()}};
-function renderTaquizas(){document.getElementById('taquizaGrid').innerHTML=taquizas.map(t=>`<article class="flex flex-col rounded-2xl border border-borde bg-white p-6 shadow-sm"><h3 class="text-2xl font-black">${t.name}</h3><ul class="mt-4 flex-1 space-y-2 text-sm text-gris">${t.items.map(x=>`<li class="flex gap-2"><span class="text-salsa">•</span><span>${x}</span></li>`).join('')}</ul><a class="mt-6 rounded-xl bg-salsa px-4 py-3 text-center font-bold text-white hover:bg-red-700" target="_blank" rel="noopener" href="https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`🌮 *SOLICITUD DE COTIZACIÓN — TAQUIZA LA TÍA*\n\n*Servicio de interés:* ${t.name}\n*Fecha del evento:* \n*Horario aproximado:* \n*Número aproximado de personas:* \n*Ubicación aproximada del evento:* \n*Nombre de contacto:* \n*WhatsApp:* \n*Comentarios o necesidades especiales:* \n\nMe gustaría conocer disponibilidad, costo y condiciones para mi evento. Gracias.`)}">Cotizar ${t.name.toLowerCase()}</a></article>`).join('')}
-const faqs=[['¿Cuál es el horario?','Abrimos lunes a domingo de 5:00 pm a 12:00 am.'],['¿Hacen envíos a domicilio?','Sí. El servicio a domicilio tiene un costo extra de $25 MXN. La disponibilidad y tiempo de entrega se confirman por WhatsApp.'],['¿Qué significa c/q?','Significa con queso.'],['¿Puedo pedir sin cebolla o sin cilantro?','Sí. Puedes elegir tus preferencias antes de agregar cada producto al carrito.'],['¿Qué salsas puedo elegir?','Guacamole, salsa mora, salsa martajada y salsa roja. También puedes pedir sin salsa.'],['¿Cómo pago?','Aceptamos efectivo y transferencia. La forma de pago se confirma por WhatsApp.'],['¿El pedido queda confirmado al enviarlo?','No. El carrito genera un resumen para WhatsApp. El pedido queda confirmado cuando Taquería La Tía valida disponibilidad, total y modalidad de entrega.'],['¿Hacen taquizas para eventos?','Sí. Tenemos servicio completo, puro taco y parrilla. Escríbenos por WhatsApp para cotizar fecha, personas y ubicación.']];
-function renderFaq(){document.getElementById('faqList').innerHTML=faqs.map(([q,a])=>`<details class="rounded-xl border border-borde bg-white p-5 shadow-sm"><summary class="cursor-pointer font-bold text-carbon">${q}</summary><p class="mt-3 text-gris">${a}</p></details>`).join('')}
-renderTabs();renderMenu();renderTaquizas();renderFaq();updateCount();
-</script>
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) removeFromCart(id);
+                else updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotal');
+            const countEl = document.getElementById('cartCount');
+            
+            // Update Count
+            const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+            countEl.textContent = totalQty;
+            
+            // Update List
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-gris mt-20 empty-cart-msg">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-borde" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        <p>Tu carrito está vacío.</p>
+                        <p class="text-sm mt-2">¡Agrega unos tacos deliciosos!</p>
+                    </div>`;
+                totalEl.textContent = '$0.00';
+                return;
+            }
+            
+            container.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                const div = document.createElement('div');
+                div.className = 'flex gap-4 bg-white p-3 rounded-xl border border-borde shadow-sm';
+                div.innerHTML = `
+                    <img src="${item.img}" class="w-16 h-16 rounded-lg object-cover" alt="${item.name}">
+                    <div class="flex-1">
+                        <h4 class="font-bold text-carbon text-sm">${item.name}</h4>
+                        <p class="text-salsa font-bold text-sm">$${item.price}</p>
+                    </div>
+                    <div class="flex flex-col items-end justify-between">
+                        <button onclick="removeFromCart(${item.id})" class="text-gray-400 hover:text-red-500">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </button>
+                        <div class="flex items-center gap-2 bg-seccion rounded-lg p-1">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-carbon font-bold">-</button>
+                            <span class="text-sm font-bold w-4 text-center">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center bg-white rounded shadow-sm text-carbon font-bold">+</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            
+            totalEl.textContent = `$${total.toFixed(2)}`;
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cartDrawer');
+            const backdrop = document.getElementById('cartBackdrop');
+            const isOpen = drawer.style.visibility === 'visible';
+            
+            if (isOpen) {
+                gsap.to(drawer, { x: '100%', duration: 0.4, ease: "power3.in", onComplete: () => drawer.style.visibility = 'hidden' });
+                gsap.to(backdrop, { opacity: 0, duration: 0.3, onComplete: () => { backdrop.style.visibility = 'hidden'; backdrop.style.pointerEvents = 'none'; } });
+            } else {
+                drawer.style.visibility = 'visible';
+                backdrop.style.visibility = 'visible';
+                backdrop.style.pointerEvents = 'auto';
+                gsap.fromTo(drawer, { x: '100%' }, { x: 0, duration: 0.4, ease: "power3.out" });
+                gsap.fromTo(backdrop, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+            }
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            let message = "Hola Taquería La Tía, quiero hacer el siguiente pedido:%0A%0A";
+            let total = 0;
+            
+            cart.forEach(item => {
+                message += `- ${item.qty}x ${item.name} ($${item.price * item.qty})%0A`;
+                total += item.price * item.qty;
+            });
+            
+            message += `%0A*Total: $${total}*%0A%0AMétodo de Pago: (Efectivo/Transferencia)%0ADirección de entrega:`;
+            
+            window.open(`https://wa.me/5215565097372?text=${message}`, '_blank');
+        }
+
+        // --- Animations (GSAP) ---
+        function initAnimations() {
+            // Check reduced motion
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                gsap.globalTimeline.timeScale(0.001);
+            }
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 1. Hero Steam
+            gsap.utils.toArray('.steam').forEach((steam, i) => {
+                gsap.to(steam, {
+                    opacity: 0,
+                    y: -60,
+                    scaleX: 1.5,
+                    scaleY: 1.5,
+                    duration: 3 + Math.random() * 2,
+                    repeat: -1,
+                    delay: i * 0.8,
+                    ease: 'power1.inOut',
+                    onRepeat: function() {
+                        gsap.set(this.targets(), { opacity: 0.6, y: 0, scale: 1 });
+                    }
+                });
+                // Initial set
+                gsap.set(steam, { opacity: 0.6 });
+            });
+
+            // 2. Logo Pop
+            gsap.from('header .font-display', {
+                duration: 0.8,
+                scale: 0,
+                rotation: -10,
+                ease: 'back.out(1.7)',
+                delay: 0.2
+            });
+
+            // 3. Hero Parallax
+            gsap.to('.hero-image', {
+                scrollTrigger: {
+                    trigger: '#inicio',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true
+                },
+                y: 50,
+                scale: 1.1
+            });
+
+            // 4. Section Fade-ins
+            gsap.utils.toArray('section').forEach(section => {
+                // Skip hero
+                if(section.id === 'inicio') return;
+                
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    },
+                    opacity: 0,
+                    y: 40,
+                    duration: 0.8,
+                    ease: 'power3.out'
+                });
+            });
+
+            // 5. Testimonials Cascade
+            gsap.utils.toArray('.testimonial').forEach((t, i) => {
+                gsap.from(t, {
+                    scrollTrigger: {
+                        trigger: t,
+                        start: 'top 90%'
+                    },
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.6,
+                    delay: i * 0.15,
+                    ease: 'power2.out'
+                });
+            });
+
+            // 6. Header Scroll Effect
+            ScrollTrigger.create({
+                start: 'top -80',
+                end: 99999,
+                toggleClass: { className: 'shadow-md', targets: '#mainHeader' }
+            });
+        }
+
+        function setupFAQ() {
+            const details = document.querySelectorAll('details');
+            details.forEach(detail => {
+                detail.addEventListener('toggle', () => {
+                    const content = detail.querySelector('div');
+                    if (detail.open) {
+                        gsap.from(content, {
+                            height: 0,
+                            opacity: 0,
+                            duration: 0.3,
+                            ease: 'power2.out'
+                        });
+                    }
+                });
+            });
+        }
+    </script>
 </body>
 </html>
